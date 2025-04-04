@@ -32,63 +32,47 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-grow py-16 min-h-screen bg-[url('/images/bg1.jpg')] bg-cover bg-center">
+    <main class="flex-grow py-16">
         <div class="max-w-md mx-auto px-6">
             <div class="bg-gray-900/50 backdrop-blur-xl p-8 rounded-2xl border border-gray-800 shadow-xl">
                 <div class="text-center mb-8">
                     <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent mb-2">
-                        Create an account
+                        Welcome back
                     </h1>
-                    <p class="text-gray-400 text-sm">Enter your details below to create your account</p>
+                    <p class="text-gray-400 text-sm">Enter your email to sign in to your account</p>
                 </div>
 
-                <form id="signupForm" method="POST" class="space-y-6" action="{{route('register.post')}}">
+                <form id="loginForm" method="POST" class="space-y-6" action="{{route('login.post')}}">
                     @csrf
-
                     <div class="space-y-4">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Nom</label>
-                            <input id="name" name="nom" type="text" placeholder="John Doe" required
-                                class="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors placeholder-gray-500" />
-                        </div>
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Prenom</label>
-                            <input id="name" name="prenom" type="text" placeholder="John Doe" required
-                                class="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors placeholder-gray-500" />
-                        </div>
-
-                        <div>
                             <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
-                            <input id="email" name="email" type="email" placeholder="m@example.com" required
+                            <input type="email" name="email" id="email" placeholder="m@example.com" required
                                 class="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors placeholder-gray-500" />
                         </div>
 
                         <div>
                             <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
-                            <input id="password" name="password" type="password" required
+                            <input type="password" name="password" id="password" required
                                 class="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors" />
                         </div>
 
-                        <div>
-                            <label for="tel" class="block text-sm font-medium text-gray-300 mb-1">Telephone</label>
-                            <input id="tel" name="tel" type="text" required
-                                class="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors" />
-                        </div>
-
-                        <div>
-                            <label for="role" class="block text-sm font-medium text-gray-300 mb-1">Role</label>
-                            <select id="role" name="role_id" required
-                                class="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors">
-                                <option value="">Choose your role</option>
-                                <option value="2">Organisateur</option>
-                                <option value="3">Client</option>
-                            </select>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="remember"
+                                    class="rounded border-gray-700 bg-gray-800/50 text-purple-500 focus:ring-purple-500" />
+                                <label for="remember" class="ml-2 text-sm text-gray-300">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a href="/forgot-password" class="text-sm text-purple-400 hover:text-purple-300 transition-colors cursor-pointer">
+                                Forgot password?
+                            </a>
                         </div>
                     </div>
 
-                    <button type="submit"
-                        class="w-full py-2 px-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-lg font-medium transition-colors cursor-pointer">
-                        Create Account
+                    <button type="submit" class="w-full py-2 px-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-lg font-medium transition-colors cursor-pointer">
+                        Sign In
                     </button>
 
                     <div class="relative my-8">
@@ -101,12 +85,12 @@
                     </div>
 
                     <p class="text-center text-sm text-gray-400">
-                        Already have an account?
-                        <a href="/signin" class="text-purple-400 hover:text-purple-300 transition-colors ml-1 cursor-pointer">
-                            Sign in
+                        Don't have an account?
+                        <a href="/signup" class="text-purple-400 hover:text-purple-300 transition-colors ml-1 cursor-pointer">
+                            Sign up
                         </a>
                     </p>
-                </form>
+                </div>
             </div>
         </div>
     </main>
@@ -161,7 +145,7 @@
             </div>
         </div>
     </footer>
-</body>
 
+</body>
 
 </html>
