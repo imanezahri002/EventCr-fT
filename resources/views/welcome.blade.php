@@ -23,7 +23,7 @@
                         <a href="/signin" class="text-sm text-white px-4 py-2 rounded-lg border border-gray-700 hover:border-gray-600 transition-colors">
                             Sign In
                         </a>
-                        <a href="/signup" class="text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white transition-colors">
+                        <a href="{{route('register')}}" class="text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white transition-colors">
                             Sign Up
                         </a>
                     </div>
