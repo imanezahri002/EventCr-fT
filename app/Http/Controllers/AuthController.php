@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegisterMail;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -35,10 +38,25 @@ class AuthController extends Controller
 
         ]);
 
-        // Log the user in
-        auth()->login($user);
+        Mail::to($user->email)->send(new RegisterMail($user));
+
+
         // quand je fais dashboard du client je dois l'inclure ici
         return redirect()->route('login');
+    }
+    public function verify($user_id, Request $request) {
+        // if (!$request->hasValidSignature()) {
+        //     return response()->json(["msg" => "Invalid/Expired url provided."], 401);
+        // }
+
+        $user = User::findOrFail($user_id);
+
+        if (!$user->hasVerifiedEmail()) {
+            $user->markEmailAsVerified();
+        }
+
+        return redirect()->route('login')->with('message', 'Email verified successfully.');
+
     }
 
     public function login(Request $request){
@@ -47,10 +65,10 @@ class AuthController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        
+
         if (auth()->attempt($validated)) {
             // Redirect to the intended page or dashboard
-            return view('welcome');
+            return view('profile');
         }
 
         // If authentication fails, redirect back with an error message

@@ -19,10 +19,10 @@
                     <a href="/" class="text-sm text-gray-300 hover:text-white transition-colors">Home</a>
                     <a href="/events" class="text-sm text-gray-300 hover:text-white transition-colors">Events</a>
                     <div class="flex items-center gap-4">
-                        <a href="/signin" class="text-sm px-4 py-2 rounded-lg border border-gray-700 hover:border-gray-600 transition-colors">
+                        <a href="{{route('login')}}" class="text-sm px-4 py-2 rounded-lg border border-gray-700 hover:border-gray-600 transition-colors">
                             Sign In
                         </a>
-                        <a href="/signup" class="text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white transition-colors">
+                        <a href="{{route('register')}}" class="text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white transition-colors">
                             Sign Up
                         </a>
                     </div>
@@ -32,7 +32,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-grow py-16">
+    <main class="flex-grow py-16 min-h-screen bg-[url('/images/bg1.jpg')] bg-cover bg-center">
         <div class="max-w-md mx-auto px-6">
             <div class="bg-gray-900/50 backdrop-blur-xl p-8 rounded-2xl border border-gray-800 shadow-xl">
                 <div class="text-center mb-8">
