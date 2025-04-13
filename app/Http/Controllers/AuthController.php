@@ -64,11 +64,31 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:8',
         ]);
-
-
         if (auth()->attempt($validated)) {
-            // Redirect to the intended page or dashboard
-            return view('profile');
+            /** @var \App\Models\User $user */
+                $user = auth()->user();
+
+
+             // Vérifie si l'email est vérifié
+            if  (!$user->hasVerifiedEmail()){
+                auth()->logout();
+                return redirect()->back()->withErrors(['email' => 'Please verify your email address.'])->withInput();
+            }
+            // Redirection selon le rôle
+            switch ($user->role->nom) {
+                case 'admin':
+                    return redirect()->route('admin.dashboard');
+                case 'organisateur':
+                    return redirect()->route('organisateur.dashboard');
+                case 'client':
+                    return redirect()->route('client.dashboard');
+                default:
+                    auth()->logout();
+                    abort(403, 'Rôle non reconnu.');
+            }
+            // Redirect to the intendedhboard
+            return redirect()->route('admin.dashboard');
+
         }
 
         // If authentication fails, redirect back with an error message

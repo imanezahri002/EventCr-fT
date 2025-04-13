@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -44,10 +45,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin-test', function () {
-    return view('admin.dashboard');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    // autres routes admin...
 });
 
-Route::get('/profile', function () {
-    return view('profile');
-})->middleware(['auth', 'verified']);
+
+// Route::get('/profile', function () {
+//     return view('profile');
+// })->middleware(['auth', 'verified']);

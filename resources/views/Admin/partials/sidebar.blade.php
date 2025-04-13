@@ -2,7 +2,7 @@
 <section id="sidebar">
     <a href="#" class="brand">
         <i class='bx bxs-smile'></i>
-        <span class="text">AdminHub</span>
+        <span class="text">Admin</span>
     </a>
     <ul class="side-menu top">
         <li class="active">
@@ -13,28 +13,29 @@
         </li>
         <li>
             <a href="#">
-                <i class='bx bxs-shopping-bag-alt' ></i>
-                <span class="text">My Store</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bxs-doughnut-chart' ></i>
-                <span class="text">Analytics</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bxs-message-dots' ></i>
-                <span class="text">Message</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
                 <i class='bx bxs-group' ></i>
-                <span class="text">Team</span>
+                <span class="text">Users</span>
             </a>
         </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-calendar-event' ></i>
+                <span class="text">Events</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-category'></i>
+                <span class="text">Catégories</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-purchase-tag-alt'></i>
+                <span class="text">Tags</span>
+            </a>
+        </li>
+
     </ul>
     <ul class="side-menu">
         <li>
