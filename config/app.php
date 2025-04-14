@@ -185,4 +185,9 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+
+
+    'pagination' => 'simple-bootstrap-4',
+
+
 ];
