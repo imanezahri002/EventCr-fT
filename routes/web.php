@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\MailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,9 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    // autres routes admin...
+    Route::get('/admin/categorie',[CategorieController::class,'index'])->name('admin.categorie');
+    Route::post('/admin/categorie/create',[CategorieController::class,'store'])->name('admin.categorie.store');
+    Route::delete('/admin/categorie/{categorie}',[CategorieController::class,'destroy'])->name('admin.categorie.destroy');
 });
 
 

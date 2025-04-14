@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categorie extends Model
+class Event extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'nom',
-    ];
 
-    public function events(){
-        return $this->hasMany(Event::class);
+
+
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
     }
+    
 }

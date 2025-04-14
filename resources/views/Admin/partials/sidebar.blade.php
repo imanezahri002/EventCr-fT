@@ -24,7 +24,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{route('admin.categorie')}}">
                 <i class='bx bxs-category'></i>
                 <span class="text">Catégories</span>
             </a>
