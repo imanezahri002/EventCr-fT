@@ -45,11 +45,14 @@
             </a>
         </li>
         <li>
-            <a href="#" class="logout">
-                <i class='bx bxs-log-out-circle' ></i>
+
+            <a href="{{route('logout')}}" class="logout">
+                <i class='bx bxs-log-out-circle'></i>
                 <span class="text">Logout</span>
             </a>
+
         </li>
+
     </ul>
 </section>
 <!-- SIDEBAR -->

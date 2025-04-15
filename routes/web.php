@@ -43,6 +43,7 @@ Route::get('/register',[AuthController::class,'registerView'])->name('register')
 Route::post('/register',[AuthController::class,'register'])->name('register.post');
 Route::get('/formLogin',[AuthController::class,'loginView'])->name('login');
 Route::post('/login',[AuthController::class,'login'])->name('login.post');
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,6 +54,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/categorie',[CategorieController::class,'index'])->name('admin.categorie');
     Route::post('/admin/categorie/create',[CategorieController::class,'store'])->name('admin.categorie.store');
     Route::delete('/admin/categorie/{categorie}',[CategorieController::class,'destroy'])->name('admin.categorie.destroy');
+    Route::post('/admin/categorie/update/{categorie}',[CategorieController::class,'update'])->name('admin.categorie.update');
 
     Route::get('/admin/users',[AdminController::class,'displayUsers'])->name('admin.users');
     Route::patch('/admin/users/{id}/ban', [AdminController::class, 'ban'])->name('admin.users.ban');
@@ -61,6 +63,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/tags',[TagController::class,'index'])->name('admin.tags');
     Route::post('/admin/tags/create',[TagController::class,'store'])->name('admin.tags.store');
     Route::delete('/admin/tags/{tag}',[TagController::class,'destroy'])->name('admin.tags.destroy');
+
+
 });
 Route::get('/profile', function () {
         return view('Client.dashboard');
