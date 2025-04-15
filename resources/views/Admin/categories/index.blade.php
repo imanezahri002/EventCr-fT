@@ -3,10 +3,23 @@
 @section('content')
 
 <main>
-    <div class="max-w-3xl mx-auto">
-      <h1 class="text-2xl font-bold text-gray-900 mb-6">Category Manager</h1>
+    <div class="head-title">
+        <div class="left">
+            <h1>Catégories</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Catégories</a>
+                </li>
+            </ul>
+        </div>
+        <a href="#" class="btn-download">
+            <i class='bx bxs-cloud-download' ></i>
+            <span class="text">Download PDF</span>
+        </a>
+    </div>
+    <div class="max-w-3xl mx-auto ">
 
-      <div class="bg-white p-6 rounded-lg shadow">
+      <div class="bg-white p-6 rounded-lg shadow mt-8 mb-6">
         <form id="categoryForm" class="flex flex-col sm:flex-row gap-4" action="{{ route('admin.categorie.store') }}" method="POST">
             @csrf
           <input
@@ -70,6 +83,9 @@
             <!-- Table rows will be inserted here by JavaScript -->
           </tbody>
         </table>
+        <div class="mt-4">
+            {{ $categories->links() }}
+        </div>
         <div id="emptyMessage" class="px-6 py-4 text-center text-sm text-gray-500" style="display: none;">
           No categories found. Add your first category below.
         </div>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\MailController;
+use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -53,8 +54,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/categorie/{categorie}',[CategorieController::class,'destroy'])->name('admin.categorie.destroy');
 
     Route::get('/admin/users',[AdminController::class,'displayUsers'])->name('admin.users');
-});
+    Route::patch('/admin/users/{id}/ban', [AdminController::class, 'ban'])->name('admin.users.ban');
+    Route::patch('/admin/users/{id}/activate', [AdminController::class, 'activate'])->name('admin.users.activate');
 
+});
+Route::get('/profile', function () {
+        return view('Client.dashboard');
+    })->name('client.dashboard');
 
 // Route::get('/profile', function () {
 //     return view('profile');

@@ -25,7 +25,7 @@ li {
 	--grey: #eee;
 	--dark-grey: #AAAAAA;
 	--dark: #342E37;
-	--red: #DB504A;
+	--red: #f93e37;
 	--yellow: #FFCE26;
 	--light-yellow: #FFF2C6;
 	--orange: #FD7238;
@@ -484,6 +484,9 @@ body {
 }
 #content main .table-data .order table tr td .status.pending {
 	background: var(--orange);
+}
+#content main .table-data .order table tr td .status.banned {
+	background: var(--red);
 }
 
 

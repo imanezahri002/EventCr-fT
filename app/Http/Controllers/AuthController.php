@@ -68,6 +68,11 @@ class AuthController extends Controller
             /** @var \App\Models\User $user */
                 $user = auth()->user();
 
+                if ($user->status === 'banned') {
+                    auth()->logout();
+                    return redirect()->back()->withErrors(['email' => 'Votre compte a été banni.'])->withInput();
+                }
+
 
              // Vérifie si l'email est vérifié
             if  (!$user->hasVerifiedEmail()){

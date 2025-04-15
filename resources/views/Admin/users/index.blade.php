@@ -3,6 +3,20 @@
 @section('content')
 
 <main>
+    <div class="head-title">
+        <div class="left">
+            <h1>Users</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Users</a>
+                </li>
+            </ul>
+        </div>
+        <a href="#" class="btn-download">
+            <i class='bx bxs-cloud-download' ></i>
+            <span class="text">Download PDF</span>
+        </a>
+    </div>
     <div class="table-data">
         <div class="order">
             <div class="head">
@@ -23,27 +37,38 @@
                 <tbody>
                     @foreach ($users as $user)
 
-
                     <tr>
                         <td>{{$user->nom}}</td>
                         <td>{{$user->prenom}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->role->nom}}</td>
-                        <td><span class="status completed">{{$user->status}}</span></td>
+                        <td>
+                            @if ($user->status == 'active')
+                            <form action="{{route('admin.users.ban',$user->id)}}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="status banned" onclick="return confirm('Confirmer le bannissement ?')">banner</button>
+                            </form>
+                            @else
+                            <form action="{{route('admin.users.activate',$user->id)}}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="status completed">activer</button>
+                            </form>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
-<!-- Pagination -->
-<div class="mt-4">
-    {{ $users->links() }}
-</div>
-
-
-
-
                 </tbody>
             </table>
+            <div class="mt-4">
+            {{ $users->links() }}
+            </div>
+
         </div>
+
     </div>
+
 </main>
 
 @endsection

@@ -187,7 +187,7 @@ return [
 
 
 
-    'pagination' => 'simple-bootstrap-4',
+    
 
 
 ];
