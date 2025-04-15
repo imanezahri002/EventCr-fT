@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\TagController;
 use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/admin/users/{id}/ban', [AdminController::class, 'ban'])->name('admin.users.ban');
     Route::patch('/admin/users/{id}/activate', [AdminController::class, 'activate'])->name('admin.users.activate');
 
+    Route::get('/admin/tags',[TagController::class,'index'])->name('admin.tags');
+    Route::post('/admin/tags/create',[TagController::class,'store'])->name('admin.tags.store');
+    Route::delete('/admin/tags/{tag}',[TagController::class,'destroy'])->name('admin.tags.destroy');
 });
 Route::get('/profile', function () {
         return view('Client.dashboard');

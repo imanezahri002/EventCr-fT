@@ -29,8 +29,8 @@
                 <span class="text">Catégories</span>
             </a>
         </li>
-        <li>
-            <a href="#">
+        <li class="{{ request()->routeIs('admin.tags') ? 'active' : '' }}">
+            <a href="{{route('admin.tags')}}">
                 <i class='bx bxs-purchase-tag-alt'></i>
                 <span class="text">Tags</span>
             </a>
