@@ -6,6 +6,7 @@ use App\Mail\RegisterMail;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
@@ -98,6 +99,12 @@ class AuthController extends Controller
 
         // If authentication fails, redirect back with an error message
         return redirect()->back()->withErrors(['email' => 'Invalid credentials'])->withInput();
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 
 }

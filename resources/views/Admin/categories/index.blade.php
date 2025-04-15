@@ -63,9 +63,10 @@
             @foreach ($categories as $categorie)
               <tr>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $categorie->nom }}</td>
+                <input type="hidden" id="categoryId" value="{{ $categorie->id }}">
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
-                  <a href="#" class="text-blue-600 hover:text-blue-800 mr-4 inline-flex items-center">
+                  <a href="#" onclick="edit(event)" class="text-blue-600 hover:text-blue-800 mr-4 inline-flex items-center">
                     <i class='bx bx-edit-alt text-xl'></i>
                   </a>
                   <form action="{{ route('admin.categorie.destroy', $categorie) }}" method="POST" style="display:inline;">
@@ -95,5 +96,22 @@
 
     </div>
   </main>
+
+<script>
+    function edit(e){
+        const data=e.target.parentElement.parentElement.parentElement.children[0].innerText;
+        const dataId=e.target.parentElement.parentElement.parentElement.children[1].value;
+        const categoryInput=document.getElementById('categoryInput');
+        categoryInput.value=data;
+        const submitButton=document.getElementById('submitButton');
+        submitButton.innerText="edit category";
+        const form=document.getElementById('categoryForm');
+        form.action = "{{ route('admin.categorie.update', '') }}/" + dataId;
+
+    }
+</script>
+
 @endsection
+
+
 

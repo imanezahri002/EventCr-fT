@@ -13,7 +13,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::paginate(3);
+        return view('Admin.tags.index', compact('tags'));
     }
 
     /**
@@ -29,7 +30,10 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //
+        Tag::create([
+            'nom' => $request->tag_name,
+        ]);
+        return redirect()->back()->with('success', 'Tag ajouté avec succès !');
     }
 
     /**
@@ -61,6 +65,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->back()->with('success', 'Tag supprimé avec succès !');
     }
 }

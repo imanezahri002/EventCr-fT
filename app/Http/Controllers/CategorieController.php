@@ -63,7 +63,11 @@ class CategorieController extends Controller
      */
     public function update(UpdateCategorieRequest $request, Categorie $categorie)
     {
-        //
+        
+        $categorie->update([
+            'nom' => $request->category_name,
+        ]);
+        return redirect()->back()->with('success', 'Catégorie modifiée avec succès !');
     }
 
     /**

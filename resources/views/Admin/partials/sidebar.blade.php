@@ -29,8 +29,8 @@
                 <span class="text">Catégories</span>
             </a>
         </li>
-        <li>
-            <a href="#">
+        <li class="{{ request()->routeIs('admin.tags') ? 'active' : '' }}">
+            <a href="{{route('admin.tags')}}">
                 <i class='bx bxs-purchase-tag-alt'></i>
                 <span class="text">Tags</span>
             </a>
@@ -45,11 +45,14 @@
             </a>
         </li>
         <li>
-            <a href="#" class="logout">
-                <i class='bx bxs-log-out-circle' ></i>
+
+            <a href="{{route('logout')}}" class="logout">
+                <i class='bx bxs-log-out-circle'></i>
                 <span class="text">Logout</span>
             </a>
+
         </li>
+
     </ul>
 </section>
 <!-- SIDEBAR -->
