@@ -10,21 +10,22 @@
     {{-- CSS du template --}}
     <link rel="stylesheet" href="@vite('resources/css/style.css')">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
 
 
     {{-- Par exemple Tailwind, Bootstrap, ou le CSS de ton template --}}
 </head>
 <body>
 
-    @include('Admin.partials.sidebar')
+    @include('Organisateur.partials.sidebar')
 
     <section id="content">
 
     {{-- Navbar --}}
-    @include('Admin.partials.navbar')
+    @include('Organisateur.partials.navbar')
 
     {{-- Sidebar --}}
-    @include('Admin.partials.sidebar')
+    @include('Organisateur.partials.sidebar')
 
         {{-- Contenu principal --}}
             {{-- Flash messages --}}
@@ -61,10 +62,11 @@
                     </span>
                 </div>
             @endif
+
             @yield('content')
     </section>
 
     {{-- Footer --}}
-    @include('Admin.partials.footer')
+    @include('Organisateur.partials.footer')
 
 

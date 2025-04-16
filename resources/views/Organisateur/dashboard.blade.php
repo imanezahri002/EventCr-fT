@@ -1,5 +1,5 @@
-@extends('Admin.layout')
-@section('title', 'Dashboard Admin')
+@extends('Organisateur.layout')
+@section('title', 'Dashboard Organisateur')
 @section('content')
 <main>
     <div class="head-title">

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\OrganisateurController;
 use App\Http\Controllers\TagController;
 use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -67,9 +68,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 });
-Route::get('/profile', function () {
-        return view('Client.dashboard');
-    })->name('client.dashboard');
+
+Route::middleware(['auth', 'role:organisateur'])->group(function () {
+    Route::get('/organisateur/dashboard', [OrganisateurController::class, 'index'])->name('organisateur.dashboard');
+
+});
+
+
 
 // Route::get('/profile', function () {
 //     return view('profile');
