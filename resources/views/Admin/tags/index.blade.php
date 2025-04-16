@@ -20,12 +20,12 @@
     <div class="max-w-3xl mx-auto ">
 
       <div class="bg-white p-6 rounded-lg shadow mt-8 mb-6">
-        <form id="categoryForm" class="flex flex-col sm:flex-row gap-4" action="{{route('admin.tags.store')}}" method="POST">
+        <form id="tagForm" class="flex flex-col sm:flex-row gap-4" action="{{route('admin.tags.store')}}" method="POST">
             @csrf
           <input
             type="text"
             name="tag_name"
-            id="categoryInput"
+            id="tagInput"
             placeholder="Enter tag name"
             aria-label="Tag name"
             class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -63,9 +63,10 @@
             @foreach ($tags as $tag)
               <tr>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $tag->nom }}</td>
+                <input type="hidden" id="tagId" value="{{ $tag->id }}">
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
-                  <a href="#" class="text-blue-600 hover:text-blue-800 mr-4 inline-flex items-center">
+                  <a href="#" onclick="edit(event)" text-blue-600 hover:text-blue-800 mr-4 inline-flex items-center">
                     <i class='bx bx-edit-alt text-xl'></i>
                   </a>
                   <form action="{{ route('admin.tags.destroy', $tag) }}" method="POST" style="display:inline;">
@@ -95,5 +96,20 @@
 
     </div>
   </main>
+  <script>
+    function edit(e){
+        const data=e.target.parentElement.parentElement.parentElement.children[0].innerText;
+        const dataId=e.target.parentElement.parentElement.parentElement.children[1].value;
+        const tagInput=document.getElementById('tagInput');
+
+        tagInput.value=data;
+        const submitButton=document.getElementById('submitButton');
+        submitButton.innerText="edit tag";
+        const form=document.getElementById('tagForm');
+        form.action = "{{ route('admin.tags.update', '') }}/" + dataId;
+    }
+
+  </script>
 @endsection
+
 
