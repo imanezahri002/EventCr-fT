@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Organisateur extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'entreprise',
+        'modePaiement',
+        'user_id',
+
+    ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

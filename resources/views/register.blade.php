@@ -46,6 +46,16 @@
                     @csrf
 
                     <div class="space-y-4">
+
+                        @if ($errors->any())
+                            <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+                                <ul class="list-disc pl-5">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Nom</label>
                             <input id="name" name="nom" type="text" placeholder="John Doe" required
@@ -80,8 +90,8 @@
                             <select id="role" name="role_id" required
                                 class="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors">
                                 <option value="">Choose your role</option>
-                                <option value="2">Organisateur</option>
-                                <option value="3">Client</option>
+                                <option value="3">Organisateur</option>
+                                <option value="2">Client</option>
                             </select>
                         </div>
                     </div>

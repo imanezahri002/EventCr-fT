@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Organisateur;
 use App\Http\Requests\StoreOrganisateurRequest;
 use App\Http\Requests\UpdateOrganisateurRequest;
+use Illuminate\Support\Facades\Auth;
 
 class OrganisateurController extends Controller
 {
@@ -16,6 +17,13 @@ class OrganisateurController extends Controller
         return view('Organisateur.dashboard');
     }
 
+    public function profile(){
+        $user = Auth::user();
+        $organisateur = Organisateur::where('user_id', $user->id)->first();
+        return view('Organisateur.profile', compact('user', 'organisateur'));
+    }
+
+   
     /**
      * Show the form for creating a new resource.
      */

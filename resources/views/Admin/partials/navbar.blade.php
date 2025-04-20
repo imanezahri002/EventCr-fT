@@ -1,4 +1,4 @@
-<nav>
+<nav class="navbar">
     <i class='bx bx-menu' ></i>
     <a href="#" class="nav-link">Categories</a>
     <form action="#">

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Categorie>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Codepromo>
  */
-class CategorieFactory extends Factory
+class CodepromoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,10 +17,7 @@ class CategorieFactory extends Factory
     public function definition(): array
     {
         return [
-            'nom' => $this->faker->word(),
-
-            'created_at' => now(),
-            'updated_at' => now(),
+            //
         ];
     }
 }

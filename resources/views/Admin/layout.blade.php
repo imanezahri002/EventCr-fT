@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     {{-- CSS du template --}}
-    <link rel="stylesheet" href="@vite('resources/css/style.css')">
+    @vite('resources/css/style.css')
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
@@ -61,6 +61,7 @@
                     </span>
                 </div>
             @endif
+
             @yield('content')
     </section>
 

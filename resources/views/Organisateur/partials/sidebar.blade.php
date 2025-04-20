@@ -11,8 +11,8 @@
                 <span class="text">Dashboard</span>
             </a>
         </li>
-        <li class="{{ request()->routeIs('organisateur.evenements') ? 'active' : '' }}">
-            <a href="#">
+        <li class="{{ request()->routeIs(['organisateur.events','organisateur.events.create']) ? 'active' : '' }}">
+            <a href="{{route('organisateur.events')}}">
                 <i class='bx bxs-calendar-event'></i>
                 <span class="text">Evenements</span>
             </a>
@@ -23,14 +23,8 @@
                 <span class="text">Reservations</span>
             </a>
         </li>
-        <li class="{{ request()->routeIs('organisateur.codePromo') ? 'active' : '' }}">
-            <a href="#">
-                <i class='bx bxs-offer'></i>
-                <span class="text">Code Promo</span>
-            </a>
-        </li>
         <li class="{{ request()->routeIs('organisateur.profile') ? 'active' : '' }}">
-            <a href="#">
+            <a href="{{route('organisateur.profile')}}">
                 <i class='bx bxs-user'></i>
                 <span class="text">Profile</span>
             </a>

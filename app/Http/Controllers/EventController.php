@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Models\Categorie;
+use App\Models\Tag;
 
 class EventController extends Controller
 {
@@ -13,15 +15,24 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $organisateur = auth()->user()->organisateur;
+        $events =  $organisateur->events()->paginate(3);
+        $events->load('categorie');
+        // dd($events->first()->load('categorie'));
+        return view('Organisateur.events.index',compact('events'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $categories = Categorie::all();
+        $tags=Tag::all();
+
+        return view('Organisateur.events.create',compact('categories','tags'));
     }
 
     /**
@@ -37,7 +48,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        return view('Organisateur.events.show', compact('event'));
     }
 
     /**

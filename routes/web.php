@@ -3,9 +3,12 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CodepromoController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrganisateurController;
 use App\Http\Controllers\TagController;
+use App\Models\Event;
 use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +74,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:organisateur'])->group(function () {
     Route::get('/organisateur/dashboard', [OrganisateurController::class, 'index'])->name('organisateur.dashboard');
+    Route::get('/organisateur/profile',[OrganisateurController::class,'profile'])->name('organisateur.profile');
+
+    Route::get('/organisateur/events',[EventController::class,'index'])->name('organisateur.events');
+    Route::get('/organisateur/events/show/{event}',[EventController::class,'index'])->name('organisateur.events.show');
+    Route::get('/organisateur/events/create',[EventController::class,'create'])->name('organisateur.events.create');
+
 
 });
 

@@ -23,12 +23,18 @@ class User extends Authenticatable implements MustVerifyEmail
         'role_id',
         'email',
         'password',
-        'tel'
+        'tel',
+        'image',
 
     ];
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function organisateur()
+    {
+        return $this->hasOne(Organisateur::class);
     }
 
     /**

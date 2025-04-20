@@ -22,10 +22,10 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->enum('status', ['active', 'cancelled', 'completed'])->default('active'); // Statut
             $table->integer('max_participants')->nullable();
-            $table->timestamps();
 
+            $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-    
+
         });
     }
 

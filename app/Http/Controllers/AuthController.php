@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\RegisterMail;
+use App\Models\Organisateur;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class AuthController extends Controller
         return view('login');
     }
     public function register(Request $request){
+
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
@@ -28,7 +30,9 @@ class AuthController extends Controller
 
         ]);
 
-        // Create the user
+        try{
+
+
         $user = User::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
@@ -38,9 +42,14 @@ class AuthController extends Controller
             'role_id' => $request->role_id,
 
         ]);
+        if ($user->role->nom == 'organisateur') {
+            Organisateur::Create(['user_id' => $user->id]);
+        }
 
         Mail::to($user->email)->send(new RegisterMail($user));
-
+    }catch (\Exception $e) {
+        return redirect()->back()->withErrors($e);
+    }
 
         // quand je fais dashboard du client je dois l'inclure ici
         return redirect()->route('login');
@@ -65,6 +74,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:8',
         ]);
+
         if (auth()->attempt($validated)) {
             /** @var \App\Models\User $user */
                 $user = auth()->user();

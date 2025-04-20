@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>@yield('title', 'Dashboard Admin')</title>
+    <title>@yield('title', 'Dashboard Organisateur')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     {{-- CSS du template --}}
-    <link rel="stylesheet" href="@vite('resources/css/style.css')">
+    @vite('resources/css/style.css')
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
 
 
     {{-- Par exemple Tailwind, Bootstrap, ou le CSS de ton template --}}
@@ -65,6 +67,8 @@
 
             @yield('content')
     </section>
+    <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+
 
     {{-- Footer --}}
     @include('Organisateur.partials.footer')

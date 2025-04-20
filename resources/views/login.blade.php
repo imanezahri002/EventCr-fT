@@ -45,6 +45,15 @@
                 <form id="loginForm" method="POST" class="space-y-6" action="{{route('login.post')}}">
                     @csrf
                     <div class="space-y-4">
+                        @if ($errors->any())
+                            <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+                                <ul class="list-disc pl-5">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
                             <input type="email" name="email" id="email" placeholder="m@example.com" required
