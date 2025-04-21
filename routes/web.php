@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CodepromoController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MailController;
@@ -87,6 +88,10 @@ Route::middleware(['auth', 'role:organisateur'])->group(function () {
 
     Route::put('/organisateur/events/update/{event}',[EventController::class,'update'])->name('organisateur.events.update');
     Route::delete('/organisateur/events/delete/{event}',[EventController::class,'destroy'])->name('organisateur.events.destroy');
+
+});
+Route::middleware(['auth', 'role:client'])->group(function () {
+    Route::get('/client/dashboard', [ClientController::class, 'index'])->name('client.dashboard');
 
 });
 

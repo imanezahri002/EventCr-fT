@@ -145,11 +145,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        // if (!Gate::allows('delete', $event)) {
-        //     return redirect()->route('organisateur.events')->with('error', 'Event cannot be deleted because it has participants');
-        // }
-
-        if($event->clients()->count() > 0){
+        if (!Gate::allows('delete', $event)) {
             return redirect()->route('organisateur.events')->with('error', 'Event cannot be deleted because it has participants');
         }
         if ($event->image) {

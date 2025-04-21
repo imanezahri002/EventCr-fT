@@ -126,8 +126,8 @@
                     class="flex-1 px-6 py-3 text-center rounded-xl bg-purple-600 text-white font-semibold hover:bg-purple-700 transition duration-200">
                     Edit Event
                 </a>
-                {{-- @Gate('organisateur.events.delete', $event) --}}
-                @if($event->clients()->count() == 0)
+                @can('organisateur.events.delete', $event)
+                {{-- @if($event->clients()->count() == 0) --}}
                 <form action="{{ route('organisateur.events.destroy', $event) }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -136,8 +136,8 @@
                     Delete Event
                 </button>
                 </form>
-                @endif
-                {{-- @endGate --}}
+                {{-- @endif --}}
+                @endcan
             </div>
         </div>
     </div>
