@@ -17,8 +17,8 @@
                 <span class="text">Users</span>
             </a>
         </li>
-        <li>
-            <a href="#">
+        <li class="{{ request()->routeIs('admin.events') ? 'active' : '' }}">
+            <a href="{{route('admin.events')}}">
                 <i class='bx bxs-calendar-event' ></i>
                 <span class="text">Events</span>
             </a>

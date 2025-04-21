@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,12 @@ class AdminController extends Controller
     {
         return view('Admin.dashboard');
     }
+    public function displayEvents(){
+        // $events = Event::paginate(10);
+        // dd($events);
+        // return view('Admin.events.index', compact('events'));
+    }
+
 
     public function displayUsers(){
 

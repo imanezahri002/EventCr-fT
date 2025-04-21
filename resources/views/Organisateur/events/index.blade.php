@@ -36,7 +36,7 @@
                 Ajouter un événement
             </button>
         </a>
-        
+
     </div>
 </div>
 
@@ -55,7 +55,7 @@
                 <!-- Event Status Badge -->
                 <div class="absolute top-4 left-4">
                     <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                        Active
+                        {{$event->status}}
                     </span>
                 </div>
 
@@ -77,7 +77,7 @@
                     <span class="px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm font-medium">
                         {{ $event->categorie ? $event->categorie->nom : 'No Category' }}
                     </span>
-                    <span class="text-2xl font-bold text-purple-600">${{ number_format($event->prix, 2) }}</span>
+                    <span class="text-2xl font-bold text-purple-600">MAD{{ number_format($event->prix, 2) }}</span>
                 </div>
 
                 <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $event->title }}</h3>
@@ -90,7 +90,14 @@
                     </svg>
                     <span class="truncate">{{ $event->location }}</span>
                 </div>
-
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                    @foreach($event->tags as $tag)
+                        <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded-full text-xs font-medium">
+                            #{{ $tag->nom }}
+                        </span>
+                    @endforeach
+                </div>
                 <!-- Description -->
                 <p class="text-gray-600 mb-6 line-clamp-2">{{ $event->description }}</p>
 

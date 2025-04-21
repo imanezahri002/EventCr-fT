@@ -12,7 +12,8 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-
+    <!-- head: below existing links -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@4.0.1/dist/css/multi-select-tag.min.css">
 
 
     {{-- Par exemple Tailwind, Bootstrap, ou le CSS de ton template --}}
@@ -68,7 +69,7 @@
             @yield('content')
     </section>
     <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
-
+    
 
     {{-- Footer --}}
     @include('Organisateur.partials.footer')

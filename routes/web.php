@@ -64,6 +64,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/admin/users/{id}/ban', [AdminController::class, 'ban'])->name('admin.users.ban');
     Route::patch('/admin/users/{id}/activate', [AdminController::class, 'activate'])->name('admin.users.activate');
 
+    // Route::get('/admin/events',[AdminController::class,'displayEvents'])->name('admin.events');
+
     Route::get('/admin/tags',[TagController::class,'index'])->name('admin.tags');
     Route::post('/admin/tags/create',[TagController::class,'store'])->name('admin.tags.store');
     Route::delete('/admin/tags/{tag}',[TagController::class,'destroy'])->name('admin.tags.destroy');
@@ -77,9 +79,13 @@ Route::middleware(['auth', 'role:organisateur'])->group(function () {
     Route::get('/organisateur/profile',[OrganisateurController::class,'profile'])->name('organisateur.profile');
 
     Route::get('/organisateur/events',[EventController::class,'index'])->name('organisateur.events');
-    Route::get('/organisateur/events/show/{event}',[EventController::class,'index'])->name('organisateur.events.show');
-    Route::get('/organisateur/events/create',[EventController::class,'create'])->name('organisateur.events.create');
 
+    Route::get('/organisateur/events/show/{event}',[EventController::class,'show'])->name('organisateur.events.show');
+    Route::get('/organisateur/events/create',[EventController::class,'create'])->name('organisateur.events.create');
+    Route::post('/organisateur/events/store',[EventController::class,'store'])->name('organisateur.events.store');
+    Route::get('/organisateur/events/edit/{event}',[EventController::class,'edit'])->name('organisateur.events.edit');
+
+    Route::put('/organisateur/events/update/{event}',[EventController::class,'update'])->name('organisateur.events.update');
 
 });
 

@@ -40,7 +40,41 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('events');
+        }
+        $organisateur=auth()->user()->organisateur;
+
+        $event=Event::create([
+            'title'=>$request->title,
+            'description'=>$request->description,
+            'date'=>$request->date,
+            'time'=>$request->time,
+            'location'=>$request->location,
+            'image'=>$imagePath,
+            'category_id'=>$request->category_id,
+            'prix'=>$request->prix,
+            'organisateur_id'=>$organisateur->id,
+            'max_participants'=>$request->max_participants,
+
+        ]);
+
+
+        if($request->promo_code){
+           $event->codePromos()->create([
+                'code'=>$request->promo_code,
+                'remise'=>$request->remise,
+                'nbUtilisation'=>$request->nbUtilisation,
+
+            ]);
+        }
+
+
+        $event->tags()->attach($request->tags);
+        return redirect()->route('organisateur.events')->with('success', 'Event created successfully');
+
     }
 
     /**
@@ -48,6 +82,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
+
         return view('Organisateur.events.show', compact('event'));
     }
 
@@ -56,7 +91,10 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $categories = Categorie::all();
+        $tags=Tag::all();
+        return view('Organisateur.events.edit', compact('event','categories','tags'));
+
     }
 
     /**
@@ -64,7 +102,40 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('events');
+        }
+        $organisateur=auth()->user()->organisateur;
+
+        $event->update([
+            'title'=>$request->title,
+            'description'=>$request->description,
+            'date'=>$request->date,
+            'time'=>$request->time,
+            'location'=>$request->location,
+            'image'=>$imagePath,
+            'category_id'=>$request->category_id,
+            'prix'=>$request->prix,
+            'organisateur_id'=>$organisateur->id,
+            'max_participants'=>$request->max_participants,
+
+        ]);
+
+
+        if($request->promo_code){
+           $event->codePromos()->create([
+                'code'=>$request->promo_code,
+                'remise'=>$request->remise,
+                'nbUtilisation'=>$request->nbUtilisation,
+            ]);
+        }
+
+
+        $event->tags()->sync($request->tags);
+        return redirect()->route('organisateur.events')->with('success', 'Event created successfully');
+
     }
 
     /**

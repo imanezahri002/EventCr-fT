@@ -6,7 +6,7 @@
     <div class="bg-white rounded-lg shadow-lg p-6">
         <h2 class="text-2xl font-bold text-gray-800 mb-6">Create New Event</h2>
 
-        <form action="#" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form action="{{route('organisateur.events.store')}}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
             <div class="grid md:grid-cols-2 gap-6">
@@ -27,6 +27,11 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">Date</label>
                     <input type="date" name="date" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
                 </div>
+                <!-- Price -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Price (MAD)</label>
+                    <input type="number" name="prix" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Time</label>
@@ -39,6 +44,7 @@
                     <input type="text" name="location" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
                 </div>
 
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
                     <select name="category_id" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
@@ -48,7 +54,15 @@
                         @endforeach
                     </select>
                 </div>
-
+                <!-- Tags -->
+                <div class="form-group">
+                    <label for="tags">Tags</label>
+                    <select name="tags[]" id="tags" class="form-control" multiple>
+                        @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}">{{ $tag->nom }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <!-- Max Participants -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Maximum Participants</label>
@@ -103,4 +117,15 @@
     </div>
 </div>
 
+<script>
+    var tagSelector = new MultiSelectTag('tags', {
+        maxSelection: 5,
+        required: true,
+        placeholder: 'Search tags',
+        onChange: function(selected) {
+            console.log('Selection changed:', selected);
+        }
+    });
+</script>
 @endsection
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@4.0.1/dist/js/multi-select-tag.min.js"></script>
