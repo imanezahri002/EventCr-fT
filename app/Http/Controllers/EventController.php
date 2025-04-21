@@ -7,6 +7,8 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Categorie;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -143,6 +145,18 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        // if (!Gate::allows('delete', $event)) {
+        //     return redirect()->route('organisateur.events')->with('error', 'Event cannot be deleted because it has participants');
+        // }
+
+        if($event->clients()->count() > 0){
+            return redirect()->route('organisateur.events')->with('error', 'Event cannot be deleted because it has participants');
+        }
+        if ($event->image) {
+            Storage::delete($event->image);
+        }
+        $event->delete();
+
+        return redirect()->route('organisateur.events')->with('success', 'Event deleted successfully');
     }
 }

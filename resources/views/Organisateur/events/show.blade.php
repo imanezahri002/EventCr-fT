@@ -100,7 +100,7 @@
                     {{-- <!-- Tags -->
                     @if($event->tags->count() > 0) --}}
                     <div>
-                        
+
                         <div class="flex flex-wrap gap-2">
                             @foreach($event->tags as $tag)
                             <span class="px-3 py-1 bg-pink-100 text-gray-600 rounded-full text-sm">
@@ -126,10 +126,18 @@
                     class="flex-1 px-6 py-3 text-center rounded-xl bg-purple-600 text-white font-semibold hover:bg-purple-700 transition duration-200">
                     Edit Event
                 </a>
-                <button type="button"
+                {{-- @Gate('organisateur.events.delete', $event) --}}
+                @if($event->clients()->count() == 0)
+                <form action="{{ route('organisateur.events.destroy', $event) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                <button type="submit"
                     class="px-6 py-3 rounded-xl border border-red-600 text-red-600 font-semibold hover:bg-red-50 transition duration-200">
                     Delete Event
                 </button>
+                </form>
+                @endif
+                {{-- @endGate --}}
             </div>
         </div>
     </div>
