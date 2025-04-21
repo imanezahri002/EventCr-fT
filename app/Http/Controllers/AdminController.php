@@ -15,9 +15,9 @@ class AdminController extends Controller
         return view('Admin.dashboard');
     }
     public function displayEvents(){
-        // $events = Event::paginate(10);
+        $events = Event::paginate(10);
         // dd($events);
-        // return view('Admin.events.index', compact('events'));
+        return view('Admin.events.index', compact('events'));
     }
 
 

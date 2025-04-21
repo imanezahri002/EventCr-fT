@@ -64,7 +64,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/admin/users/{id}/ban', [AdminController::class, 'ban'])->name('admin.users.ban');
     Route::patch('/admin/users/{id}/activate', [AdminController::class, 'activate'])->name('admin.users.activate');
 
-    // Route::get('/admin/events',[AdminController::class,'displayEvents'])->name('admin.events');
+    Route::get('/admin/events',[AdminController::class,'displayEvents'])->name('admin.events');
 
     Route::get('/admin/tags',[TagController::class,'index'])->name('admin.tags');
     Route::post('/admin/tags/create',[TagController::class,'store'])->name('admin.tags.store');
