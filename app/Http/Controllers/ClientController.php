@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Models\Event;
 
 class ClientController extends Controller
 {
@@ -13,9 +14,18 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view('Client.dashboard');
+        $events = Event::where('status', 'accepted')->get();
+        // dd($events);
+        return view('Client.events.eventsListe', compact('events'));
     }
 
+    public function addreservation(Event $event)
+    {
+        $user = auth()->user();
+        $client = $user->client;
+        // dd($event);
+        return view('Client.events.addReservation', compact('event','client','user'));
+    }
     /**
      * Show the form for creating a new resource.
      */

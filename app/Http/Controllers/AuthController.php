@@ -97,7 +97,7 @@ class AuthController extends Controller
                 case 'organisateur':
                     return redirect()->route('organisateur.dashboard');
                 case 'client':
-                    return redirect()->route('client.dashboard');
+                    return redirect()->route('client.events');
                 default:
                     auth()->logout();
                     abort(403, 'Rôle non reconnu.');
