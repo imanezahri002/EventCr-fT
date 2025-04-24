@@ -95,8 +95,11 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/reservation/{event}', [ClientController::class, 'addReservation'])->name('reservations.create');
     Route::post('/reservation/{reservation}',[ClientController::class,'paiement'])->name('reservations.paiement');
 
-    Route::post('validate-codePromo',[CodepromoController::class,'validateCodePromo'])->name('validate.codePromo');
+    Route::get('/client/reservations',[ClientController::class,'listeReservation'])->name('client.reservations');
+    Route::get('/client/profile',[ClientController::class,'profile'])->name('client.profile');
+    Route::put('/client/profile/update/{user}',[ClientController::class,'updateProfile'])->name('client.profile.update');
 
+    Route::post('validate-codePromo',[CodepromoController::class,'validateCodePromo'])->name('validate.codePromo');
 
 });
 

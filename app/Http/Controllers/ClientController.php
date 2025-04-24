@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Event;
+use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
@@ -23,9 +24,47 @@ class ClientController extends Controller
     {
         $user = auth()->user();
         $client = $user->client;
-        // dd($event);
         return view('Client.events.addReservation', compact('event','client','user'));
     }
+
+    public function listeReservation(){
+
+        return view ('Client.reservations.reservation');
+    }
+    public function updateProfile(Request $request)
+    {
+
+        $user = auth()->user();
+        $client = $user->clients;
+
+        $user->update([
+            'prenom' => $request->prenom,
+            'nom' => $request->nom,
+            'tel' => $request->tel,
+            'email' => $request->email,
+        ]);
+
+        $client->update([
+            'date_naissance' => $request->dateN,
+            'genre' => $request->genre,
+            'adresse' => $request->adresse,
+        ]);
+
+        return redirect()->back()->with('success', 'Profil mis à jour avec succès.');
+
+
+    }
+
+
+    public function profile(){
+
+        $user = auth()->user();
+        $client = $user->clients;
+
+        return view('Client.profile.index', compact('user', 'client'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -6,6 +6,8 @@
 
 
 <div id="events" class="tab-content active">
+
+    
     <div class="mb-8 flex justify-between items-center">
       <h2 class="text-2xl font-bold text-gray-800">Événements à venir</h2>
       <div class="relative">

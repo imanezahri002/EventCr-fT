@@ -1,3 +1,4 @@
+
 <header class="py-6 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="flex items-center">
@@ -6,7 +7,7 @@
         </div>
         <h1 class="ml-3 text-xl font-bold bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">EventCraft</h1>
       </div>
-      <div class="flex items-center space-x-4">
+    <div class="flex items-center space-x-4">
         <div class="relative">
           <button class="p-2 rounded-full hover:bg-gray-100">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -19,6 +20,11 @@
           <img src="https://i.pravatar.cc/150?img=32" alt="Photo de profil" class="h-8 w-8 rounded-full border-2 border-white">
           <span class="ml-2 text-sm font-medium text-gray-700 hidden sm:inline-block">Sophie Martin</span>
         </div>
-      </div>
+        <a href="{{route('logout')}}" class="inline-block">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+        </a>
+    </div>
     </div>
   </header>

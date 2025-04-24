@@ -4,15 +4,8 @@
 
 @section('content')
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-    <nav class="flex text-sm">
-      <a href="{{route('client.events')}}" class="text-gray-500 hover:text-gray-700">Événements</a>
-      <span class="mx-2 text-gray-500">/</span>
-      <span class="text-gray-900 font-medium">Réservation</span>
-    </nav>
-</div>
 
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
     <div class="mb-8">
       <h2 class="text-2xl font-bold text-gray-800">Réserver votre place</h2>
       <p class="text-gray-600 mt-1">Complétez le formulaire ci-dessous pour finaliser votre réservation</p>
@@ -81,10 +74,6 @@
                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Options supplémentaires</h3>
 
                 <div class="grid grid-cols-1 gap-4">
-                  <div>
-                    <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Nombre de billets</label>
-                    <input type="number" id="quantity" value="1" min="1" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent">
-                  </div>
 
                   <div>
                     <label for="promo_code" class="block text-sm font-medium text-gray-700 mb-1">Code promo</label>
@@ -92,6 +81,16 @@
                       <input type="text" name="code_promo" id="promo_code" placeholder="Entrez votre code promo" class="flex-grow px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent">
                       <button onclick="validatePromoCode()" type="button" class="bg-gray-100 text-gray-700 text-sm font-medium py-2 px-4 rounded-r-lg border border-gray-300 hover:bg-gray-200 transition-all">
                         Appliquer</button>
+                    </div>
+
+                    <div id="valid-promo" class="mt-2 text-green-500 text-sm hidden">
+                        Code promo valide! Remise: <span id="remise"></span>
+                    </div>
+
+
+
+                    <div id="invalid-promo" class="mt-2 text-red-500 text-sm hidden">
+                        Code promo non valide pour cet événement
                     </div>
                   </div>
 
@@ -111,7 +110,7 @@
 
                     <button type="submit" class="bg-gradient-to-r from-purple-400 to-pink-600 text-white font-medium py-2 px-6 rounded-full hover:opacity-90 transition-all shadow-md">
 
-                        Reserver
+                        Paiement
                     </button>
 
                   </div>
@@ -131,15 +130,12 @@
             <div class="border-t border-gray-200 py-4">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-sm text-gray-600">Prix</span>
-                <span class="text-sm font-medium text-gray-800">75,00 €</span>
+                <span class="text-sm font-medium text-gray-800">{{$event->prix}}</span>
               </div>
+
               <div class="flex justify-between items-center mb-2">
                 <span class="text-sm text-gray-600">Remise</span>
-                <span class="text-sm font-medium text-gray-800" id="pourcentage_de_remise">30%</span>
-              </div>
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-sm text-gray-600">Quantité</span>
-                <span class="text-sm font-medium text-gray-800">1</span>
+                <span class="text-sm font-medium text-gray-800" id="pourcentage_de_remise">0</span>
               </div>
             </div>
 
@@ -156,8 +152,8 @@
 
             <div class="border-t border-gray-200 pt-4">
               <div class="flex justify-between items-center">
-                <span class="text-base font-semibold text-gray-800">Total</span>
-                <span class="text-lg font-bold bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">95,40 €</span>
+                <span class="text-base font-semibold text-gray-800" >Total</span>
+                <span class="text-lg font-bold bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent" id="totalp">95,40 MAD</span>
               </div>
             </div>
 
@@ -187,32 +183,56 @@
         </div>
       </div>
     </div>
-  </main>
+  </div>
 
 @endsection
 
 @section('scripts')
+
 <script>
 
      async function validatePromoCode(){
 
         let codePromo=document.getElementById('promo_code').value;
         let event=document.getElementById('event_id').value;
-        
-        fetch('/api/validate-codePromo',
+        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch('/validate-codePromo',
         {
             method: 'POST',
             headers: {
+                'X-CSRF-TOKEN': token,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 codePromo: codePromo,
-                event: event
+                event: event,
             }),
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            if(data['valide']){
+
+                let dataRemise = data["codePromo"]["remise"];
+               let valid = document.getElementById("valid-promo");
+               valid.classList.remove('hidden');
+               document.getElementById("invalid-promo").classList.add('hidden')
+               let remise = document.getElementById("remise");
+               remise.innerText = dataRemise + "%";
+               let pourcentage_de_remise=document.getElementById('pourcentage_de_remise');
+               pourcentage_de_remise.innerText=dataRemise + "%";
+               let prix={{$event->prix}};
+
+               let total = (prix-((prix*dataRemise)/100)).toFixed(2);
+               let totalprice=document.getElementById('totalp');
+               totalprice.innerText=total + "MAD";
+
+            }else if(!data['valide']){
+                let valid = document.getElementById("valid-promo");
+                valid.classList.add('hidden');
+                document.getElementById("invalid-promo").classList.remove('hidden')
+            }
+            console.log(data['valide']);
 
         })
         .catch(error => {
@@ -222,4 +242,3 @@
 
     }
 </script>
-@endsection
