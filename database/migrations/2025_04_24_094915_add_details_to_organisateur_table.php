@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->foreignId('user_id')
-              ->references('id')->on('users')
-              ->onDelete('set null');
+        Schema::table('organisateurs', function (Blueprint $table) {
+            $table->string('ville')->nullable();
+            $table->string('adresse')->nullable();
+            $table->string('codePostal')->nullable();
         });
     }
 
@@ -23,9 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
+        Schema::table('organisateur', function (Blueprint $table) {
+            $table->dropColumn(['ville', 'adresse', 'codePostal']);
         });
     }
 };

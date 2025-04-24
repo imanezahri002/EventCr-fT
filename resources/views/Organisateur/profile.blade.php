@@ -4,7 +4,7 @@
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     <!-- Profile Summary Card -->
-    <div class="max-w-md w-full mt-6 ml-6 sm:mt-10 sm:ml-10">
+    <div class="max-w-md w-full mt-6 pl-[8px] sm:mt-10 sm:pl-[16px]">
 
          <!-- Profile Summary Card -->
          <div class="lg:col-span-1 space-y-6">
@@ -55,12 +55,12 @@
                     </div>
 
 
-                    <div class="pt-4 border-t border-gray-100">
+                    {{-- <div class="pt-4 border-t border-gray-100">
                         <button id="edit-profile-btn"
                             class="w-full bg-accent hover:bg-accentHover text-white py-2 px-4 rounded-lg transition-colors font-medium">
                             <i class="fas fa-edit mr-2"></i> Edit Profile
                         </button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
@@ -68,145 +68,82 @@
         </div>
     </div>
 
-    <!-- Main Profile Content -->
-    <div id="edit-profile-modal"
-        class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-semibold">Edit Profile</h3>
-                    <button id="close-modal" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
 
-                <form action="#" method="POST" class="space-y-4"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="text-center mb-4">
-                        <div class="relative inline-block">
-                            <img id="modal-profile-image" src="{{ $user->image }}" alt="Profile"
-                                class="h-24 w-24 rounded-full border-2 border-accent object-cover mx-auto">
-                            <label for="modal-image-upload"
-                                class="absolute bottom-0 right-0 bg-accent hover:bg-accentHover text-white rounded-full p-2 cursor-pointer shadow-lg">
-                                <i class="fas fa-camera"></i>
-                            </label>
-                            <input type="file" id="modal-image-upload" name="image" class="hidden"
-                                accept="image/*">
+
+<div class="lg:col-span-2 space-y-6 w-full max-w-[600px] mt-6 ">
+    <div class="bg-white rounded-xl shadow-card overflow-hidden card">
+        <div class="bg-gradient-to-r from-accent to-darkTeal p-6">
+            <h2 class="text-white text-xl font-semibold">Modifier votre profil</h2>
+        </div>
+
+        <div class="p-6">
+            <form action="#" method="POST" class="space-y-6">
+                @csrf
+                @method('PUT')
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Informations personnelles -->
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Informations personnelles</h4>
+
+                        <div class="mb-4">
+                            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
+                            <input name="prenom" type="text" id="firstName" value="{{$user->prenom}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
+                            <input name="nom" type="text" id="lastName" value="{{$user->nom}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input name="email" type="email" id="email" value="{{$user->email}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
+                            <input name="tel" type="tel" id="phone" value="{{$user->tel}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                        </div>
+
+                    </div>
+
+                    <!-- Informations complémentaires -->
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Informations complémentaires</h4>
+                        <div class="mb-4">
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">CodePostal</label>
+                            <input name="codePostal" type="tel" id="phone" value="{{$organisateur->codePostal}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Adresse</label>
+                            <input name="adresse" type="text" id="address" value="{{$organisateur->adresse}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="entreprise" class="block text-sm font-medium text-gray-700 mb-1">Entreprise</label>
+                            <input name="entreprise" type="text" id="entreprise" value="{{$organisateur->entreprise}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                        </div>
+                        <div class="mb-4">
+                            <label for="entreprise" class="block text-sm font-medium text-gray-700 mb-1">Ville</label>
+                            <input name="ville" type="text" id="ville" value="{{$organisateur->ville}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
                         </div>
                     </div>
+                </div>
 
-                    <div>
-                        <label for="first_name" class="block text-sm font-medium text-gray-500 mb-1">Nom</label>
-                        <input type="text" id="first_name" name="first_name"
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-accent/20 focus:border-accent"
-                            value="{{ $user->nom }}">
-                    </div>
-
-                    <div>
-                        <label for="last_name" class="block text-sm font-medium text-gray-500 mb-1">Prenom</label>
-                        <input type="text" id="last_name" name="last_name"
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-accent/20 focus:border-accent"
-                            value="{{ $user->prenom }}">
-                    </div>
-
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-500 mb-1">Email</label>
-                        <input type="email" id="email" name="email"
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-accent/20 focus:border-accent"
-                            value="{{ $user->email }}">
-                    </div>
-
-                    <div>
-                        <label for="date_of_birth" class="block text-sm font-medium text-gray-500 mb-1">Telephone</label>
-                        <input type="text" id="date_of_birth" name="tel"
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-accent/20 focus:border-accent"
-                            value="{{$user->tel }}">
-                    </div>
-
-                    <div>
-                        <label for="gender" class="block text-sm font-medium text-gray-500 mb-1">Entreprise</label>
-                        <input type="text" id="date_of_birth" name="entreprise"
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-accent/20 focus:border-accent"
-                            value="{{$organisateur->entreprise }}">
-                    </div>
-
-                    <div class="pt-2">
-                        <button type="submit"
-                            class="w-full bg-accent hover:bg-accentHover text-white py-2.5 px-4 rounded-lg transition-colors font-medium">
-                            Save Changes
-                        </button>
-                    </div>
-                </form>
-            </div>
+                <div class="mt-8 flex justify-end space-x-3">
+                    <button type="submit" class="bg-gradient-to-r from-accent to-darkTeal text-white font-medium py-2 px-6 rounded-full hover:opacity-90 transition-all shadow-md">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-
-
 </div>
-
+</div>
 <script>
 
-    document.addEventListener('DOMContentLoaded', function() {
-            // Profile image upload preview
-            const imageUpload = document.getElementById('image-upload');
-            const profileImage = document.getElementById('profile-image');
-            const modalImageUpload = document.getElementById('modal-image-upload');
-            const modalProfileImage = document.getElementById('modal-profile-image');
 
-            if (imageUpload && profileImage) {
-                imageUpload.addEventListener('change', function(e) {
-                    if (e.target.files.length > 0) {
-                        const src = URL.createObjectURL(e.target.files[0]);
-                        profileImage.src = src;
-                        if (modalProfileImage) modalProfileImage.src = src;
-                    }
-                });
-            }
-
-            if (modalImageUpload && modalProfileImage) {
-                modalImageUpload.addEventListener('change', function(e) {
-                    if (e.target.files.length > 0) {
-                        const src = URL.createObjectURL(e.target.files[0]);
-                        modalProfileImage.src = src;
-                        if (profileImage) profileImage.src = src;
-                    }
-                });
-            }
-
-            // Modal controls
-            const editProfileBtn = document.getElementById('edit-profile-btn');
-            const editProfileModal = document.getElementById('edit-profile-modal');
-            const closeModalBtn = document.getElementById('close-modal');
-
-            if (editProfileBtn && editProfileModal) {
-                editProfileBtn.addEventListener('click', function() {
-                    editProfileModal.classList.remove('hidden');
-                });
-            }
-
-            if (closeModalBtn && editProfileModal) {
-                closeModalBtn.addEventListener('click', function() {
-                    editProfileModal.classList.add('hidden');
-                });
-            }
-
-            // Close modal when clicking outside
-            window.addEventListener('click', function(e) {
-                if (editProfileModal && e.target === editProfileModal) {
-                    editProfileModal.classList.add('hidden');
-                }
-            });
-
-            // Edit personal information
-            const editPersonalInfoBtn = document.getElementById('edit-personal-info-btn');
-            if (editPersonalInfoBtn && editProfileModal) {
-                editPersonalInfoBtn.addEventListener('click', function() {
-                    editProfileModal.classList.remove('hidden');
-                });
-            }
-        });
 
         tailwind.config = {
             theme: {
