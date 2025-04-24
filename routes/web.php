@@ -78,6 +78,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:organisateur'])->group(function () {
     Route::get('/organisateur/dashboard', [OrganisateurController::class, 'index'])->name('organisateur.dashboard');
     Route::get('/organisateur/profile',[OrganisateurController::class,'profile'])->name('organisateur.profile');
+    Route::put('/organisateur/profile/update/{user}',[OrganisateurController::class,'updateProfile'])->name('organisateur.profile.update');
 
     Route::get('/organisateur/events',[EventController::class,'index'])->name('organisateur.events');
 
@@ -88,6 +89,7 @@ Route::middleware(['auth', 'role:organisateur'])->group(function () {
 
     Route::put('/organisateur/events/update/{event}',[EventController::class,'update'])->name('organisateur.events.update');
     Route::delete('/organisateur/events/delete/{event}',[EventController::class,'destroy'])->name('organisateur.events.destroy');
+
 
 });
 Route::middleware(['auth', 'role:client'])->group(function () {
@@ -100,7 +102,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::put('/client/profile/update/{user}',[ClientController::class,'updateProfile'])->name('client.profile.update');
 
     Route::post('validate-codePromo',[CodepromoController::class,'validateCodePromo'])->name('validate.codePromo');
-
+ 
 });
 
 

@@ -16,13 +16,17 @@
         <!-- Profile Header -->
         <div class="flex flex-col sm:flex-row items-center mb-8">
           <div class="relative mb-4 sm:mb-0 sm:mr-6">
-            <img src="https://i.pravatar.cc/150?img=32" alt="Photo de profil" class="h-24 w-24 rounded-full border-4 border-white shadow-md">
-            <button class="absolute bottom-0 right-0 bg-gradient-to-r from-purple-400 to-pink-600 text-white p-1.5 rounded-full shadow-md hover:opacity-90 transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
+            <img id="profile-image" src="{{ asset('storage/' . $user->image) }}" class="h-24 w-24 rounded-full border-4 border-white object-cover mx-auto">
+
+            <button id="open-file" type="button" class="absolute bottom-0 right-0 bg-gradient-to-r from-purple-400 to-pink-600 text-white p-1.5 rounded-full shadow-md hover:opacity-90 transition-all">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+
             </button>
+
           </div>
           <div class="text-center sm:text-left">
             <h3 class="text-xl font-bold text-gray-800">{{$user->nom}}{{$user->prenom}}</h3>
@@ -36,10 +40,11 @@
         </div>
 
         <!-- Profile Form -->
-        <form action="{{ route('client.profile.update', $user->id) }}" method="POST" class="space-y-6">
+        <form action="{{ route('client.profile.update', $user->id) }}" method="POST" class="space-y-6" enctype="multipart/form-data">
           @csrf
           @method('PUT')
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input type="file" id="image-upload" class="hidden" accept="image/*" name="image">
             <!-- Informations personnelles -->
             <div>
               <h4 class="text-lg font-semibold text-gray-800 mb-4">Informations personnelles</h4>
@@ -108,5 +113,24 @@
       </div>
     </div>
   </div>
+<script>
+    const button = document.getElementById('open-file');
+  const inputFile = document.getElementById('image-upload');
+  const profileImage = document.getElementById('profile-image');
 
+  button.addEventListener('click', () => {
+    inputFile.click();
+  });
+
+  inputFile.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        profileImage.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
 @endsection

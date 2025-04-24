@@ -12,12 +12,11 @@
             <div class="bg-white rounded-xl shadow-card overflow-hidden card">
                 <div class="bg-gradient-to-r from-accent to-darkTeal p-6 text-center">
                     <div class="relative inline-block">
-                        <img id="profile-image" src="{{ $user->image }}"
-                            class="h-24 w-24 rounded-full border-4 border-white object-cover mx-auto">
-                        {{-- <label for="image-upload" class="absolute bottom-0 right-0 bg-accent hover:bg-accentHover text-white rounded-full p-2 cursor-pointer shadow-lg"> --}}
-                        {{-- <i class="fas fa-camera"></i> --}}
-                        {{-- </label> --}}
-                        {{-- <input type="file" id="image-upload" class="hidden"> --}}
+                    <img id="profile-image" src="{{ $user->image }}" class="h-24 w-24 rounded-full border-4 border-white object-cover mx-auto">
+                         <label for="image-upload" class=" bottom-0 right-0 bg-accent hover:bg-accentHover text-white rounded-full p-2 cursor-pointer shadow-lg">
+                         <i class="fas fa-camera"></i>
+                         </label>
+                         <input type="file" id="image-upload" class="hidden">
                     </div>
                     <h2 class="text-white text-xl font-semibold mt-4">{{ $user->nom }} {{ $user->prenom }}</h2>
 
@@ -77,7 +76,7 @@
         </div>
 
         <div class="p-6">
-            <form action="#" method="POST" class="space-y-6">
+            <form action="{{route('organisateur.profile.update',$user)}}" method="POST" class="space-y-6">
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -143,6 +142,18 @@
 </div>
 <script>
 
+    document.getElementById('image-upload').addEventListener('change', function (event) {
+
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('profile-image').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
 
 
         tailwind.config = {
@@ -171,6 +182,11 @@
             }
         }
 
-    </script>
+
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 @endsection

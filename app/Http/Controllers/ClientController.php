@@ -31,28 +31,35 @@ class ClientController extends Controller
 
         return view ('Client.reservations.reservation');
     }
-    public function updateProfile(Request $request)
+    public function updateProfile(UpdateClientRequest $request)
     {
 
-        $user = auth()->user();
-        $client = $user->clients;
+            $user = auth()->user();
+            $client = $user->clients;
 
-        $user->update([
+        /**
+         * @var User $user
+         */
+
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('images', 'public');
+                $user->update(['image' => $imagePath]);
+            }
+
+           $user->update([
             'prenom' => $request->prenom,
             'nom' => $request->nom,
             'tel' => $request->tel,
             'email' => $request->email,
         ]);
 
-        $client->update([
+           $client->update([
             'date_naissance' => $request->dateN,
             'genre' => $request->genre,
             'adresse' => $request->adresse,
         ]);
 
         return redirect()->back()->with('success', 'Profil mis à jour avec succès.');
-
-
     }
 
 
@@ -60,10 +67,10 @@ class ClientController extends Controller
 
         $user = auth()->user();
         $client = $user->clients;
-
         return view('Client.profile.index', compact('user', 'client'));
 
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -23,7 +23,28 @@ class OrganisateurController extends Controller
         return view('Organisateur.profile', compact('user', 'organisateur'));
     }
 
-   
+   public function updateProfile(UpdateOrganisateurRequest $request){
+        $user = Auth::user();
+        $organisateur = Organisateur::where('user_id', $user->id)->first();
+        $validate=$request->validated();
+
+        $user->update([
+            'prenom' => $validate['prenom'],
+            'nom' => $validate['nom'],
+            'tel' => $validate['tel'],
+            'email' => $validate['email'],
+            
+        ]);
+
+        $organisateur->update([
+            'entreprise' => $validate['entreprise'],
+            'ville' => $validate['ville'],
+            'adresse' => $validate['adresse'],
+            'codePostal'=> $validate['codePostal'],
+        ]);
+
+        return redirect()->back()->with('success', 'Profile updated successfully');
+    }
     /**
      * Show the form for creating a new resource.
      */

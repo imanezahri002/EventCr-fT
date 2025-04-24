@@ -11,7 +11,7 @@ class UpdateOrganisateurRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateOrganisateurRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'tel' => 'required|string|max:20',
+            'codePostal' => 'string|max:10',
+            'adresse' => 'string|max:255',
+            'entreprise' => 'string|max:255',
+            'ville' => 'string|max:255'
         ];
     }
 }

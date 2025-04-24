@@ -11,6 +11,9 @@ class Organisateur extends Model
     protected $fillable = [
         'entreprise',
         'modePaiement',
+        'ville',
+        'adresse',
+        'codePostal',
         'user_id',
 
     ];
