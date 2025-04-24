@@ -15,8 +15,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $events = Event::where('status', 'accepted')->get();
+        // $events = Event::where('status', 'accepted')->get();
         // dd($events);
+        $events = Event::with('categorie')->where('status', 'accepted')->get();
         return view('Client.events.eventsListe', compact('events'));
     }
 

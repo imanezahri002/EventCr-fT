@@ -1,4 +1,4 @@
-
+@auth
 <header class="py-6 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="flex items-center">
@@ -17,8 +17,8 @@
           </button>
         </div>
         <div class="flex items-center">
-          <img src="https://i.pravatar.cc/150?img=32" alt="Photo de profil" class="h-8 w-8 rounded-full border-2 border-white">
-          <span class="ml-2 text-sm font-medium text-gray-700 hidden sm:inline-block">Sophie Martin</span>
+          <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Photo de profil" class="h-8 w-8 rounded-full border-2 border-white">
+          <span class="ml-2 text-sm font-medium text-gray-700 hidden sm:inline-block">{{ Auth::user()->prenom }}{{ Auth::user()->nom }}</span>
         </div>
         <a href="{{route('logout')}}" class="inline-block">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -28,3 +28,4 @@
     </div>
     </div>
   </header>
+  @endauth

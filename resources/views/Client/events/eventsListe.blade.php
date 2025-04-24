@@ -7,7 +7,7 @@
 
 <div id="events" class="tab-content active">
 
-    
+
     <div class="mb-8 flex justify-between items-center">
       <h2 class="text-2xl font-bold text-gray-800">Événements à venir</h2>
       <div class="relative">
@@ -48,7 +48,7 @@
       <div class="glass-effect rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1">
         <div class="relative">
           <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Théâtre" class="w-full h-48 object-cover">
-          <div class="absolute top-4 right-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Théâtre</div>
+          <div class="absolute top-4 right-4 bg-gradient-to-r from-purple-400 to-pink-600 text-white text-xs font-semibold px-3 py-1 rounded-full">{{ $event->categorie->nom }}</div>
         </div>
         <div class="p-5">
           <h3 class="text-lg font-semibold text-gray-800">{{$event->title}}</h3>
