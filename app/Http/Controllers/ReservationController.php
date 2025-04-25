@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -28,8 +29,25 @@ class ReservationController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreReservationRequest $request)
-    {
-        //
+    {  
+        $client = Auth::user()->clients;
+
+        $data = [
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'tel' => $request->tel,
+        ];
+
+
+        if ($request->filled('codePromo')) {
+            $data['codePromo'] = $request->codePromo;
+        }
+
+        $client->events()->attach($request->event_id, $data);
+
+        return redirect()->route('client.reservations')->with('success', 'Reservation added successfully');
+
     }
 
     /**

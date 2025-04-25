@@ -11,7 +11,7 @@ class StoreReservationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,17 @@ class StoreReservationRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-            //
+            
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'tel' => 'required|string',
+            'codePromo' => 'nullable|string',
+            'event_id' => 'required|exists:events,id',
+
+
         ];
     }
 }

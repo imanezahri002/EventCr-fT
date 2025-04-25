@@ -16,7 +16,7 @@
       <div class="lg:col-span-2">
         <div class="glass-effect rounded-xl overflow-hidden shadow-md">
           <div class="p-6">
-            <form action="#" method="POST" class="space-y-6">
+            <form action="{{route('client.reservations.store')}}" method="POST" class="space-y-6">
               @csrf
               <!-- Détails de l'événement -->
               <div class="mb-8">
@@ -26,7 +26,7 @@
                   <div>
                     <label for="event_name" class="block text-sm font-medium text-gray-700 mb-1">Événement</label>
                     <input type="text" id="event_name" value="{{$event->title}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent bg-gray-50" disabled>
-                    <input id="event_id" value="{{$event->id}}" type="hidden">
+                    <input name="event_id" id="event_id" value="{{$event->id}}" type="hidden">
                 </div>
 
                   <div>
@@ -49,22 +49,22 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
-                    <input type="text" id="firstName" value="{{$user->prenom}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent">
+                    <input name="prenom" type="text" id="firstName" value="{{$user->prenom}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent">
                   </div>
 
                   <div>
                     <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
-                    <input type="text" id="lastName" value="{{$user->nom}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent">
+                    <input name="nom" type="text" id="lastName" value="{{$user->nom}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent">
                   </div>
 
                   <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="email" value="{{$user->email}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent">
+                    <input name="email" type="email" id="email" value="{{$user->email}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent">
                   </div>
 
                   <div>
                     <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
-                    <input type="tel" id="phone" value="{{$user->tel}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent">
+                    <input name="tel" type="tel" id="phone" value="{{$user->tel}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent">
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@
 
                     <button type="submit" class="bg-gradient-to-r from-purple-400 to-pink-600 text-white font-medium py-2 px-6 rounded-full hover:opacity-90 transition-all shadow-md">
 
-                        Paiement
+                        Reserver
                     </button>
 
                   </div>

@@ -18,9 +18,11 @@ class Client extends Model
     public function events(){
         return $this->belongsToMany(Event::class, 'reservations');
     }
+    
     public function users(){
         return $this->belongsTo(User::class);
     }
+
 
 
 }

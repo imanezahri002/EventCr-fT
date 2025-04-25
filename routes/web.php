@@ -8,6 +8,7 @@ use App\Http\Controllers\CodepromoController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrganisateurController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TagController;
 use App\Models\Event;
 use GuzzleHttp\Client;
@@ -102,7 +103,8 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::put('/client/profile/update/{user}',[ClientController::class,'updateProfile'])->name('client.profile.update');
 
     Route::post('validate-codePromo',[CodepromoController::class,'validateCodePromo'])->name('validate.codePromo');
- 
+
+    Route::post('/client/reservations',[ReservationController::class,'store'])->name('client.reservations.store');
 });
 
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     use HasFactory;
+    
     public function codePromos()
     {
         return $this->belongsTo(Codepromo::class);

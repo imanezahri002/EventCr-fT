@@ -27,13 +27,13 @@ class OrganisateurController extends Controller
         $user = Auth::user();
         $organisateur = Organisateur::where('user_id', $user->id)->first();
         $validate=$request->validated();
-
+        /** @var \App\Models\User $user */
         $user->update([
             'prenom' => $validate['prenom'],
             'nom' => $validate['nom'],
             'tel' => $validate['tel'],
             'email' => $validate['email'],
-            
+
         ]);
 
         $organisateur->update([
