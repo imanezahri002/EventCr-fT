@@ -197,23 +197,20 @@
         let event=document.getElementById('event_id').value;
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        fetch('/validate-codePromo',
-        {
+        fetch('/validate-codePromo', {
             method: 'POST',
             headers: {
-                'X-CSRF-TOKEN': token,
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
-            body: JSON.stringify({
-                codePromo: codePromo,
-                event: event,
-            }),
+            body: JSON.stringify({ code: codePromo , event: event })
         })
+
         .then(response => response.json())
         .then(data => {
             if(data['valide']){
 
-                let dataRemise = data["codePromo"]["remise"];
+               let dataRemise = data["codePromo"]["remise"];
                let valid = document.getElementById("valid-promo");
                valid.classList.remove('hidden');
                document.getElementById("invalid-promo").classList.add('hidden')
