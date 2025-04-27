@@ -23,11 +23,12 @@
                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Détails de l'événement</h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
                   <div>
                     <label for="event_name" class="block text-sm font-medium text-gray-700 mb-1">Événement</label>
                     <input type="text" id="event_name" value="{{$event->title}}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent bg-gray-50" disabled>
                     <input name="event_id" id="event_id" value="{{$event->id}}" type="hidden">
-                </div>
+                  </div>
 
                   <div>
                     <label for="event_date" class="block text-sm font-medium text-gray-700 mb-1">Date</label>

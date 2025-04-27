@@ -96,15 +96,16 @@ Route::middleware(['auth', 'role:organisateur'])->group(function () {
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/dashboard', [ClientController::class, 'index'])->name('client.events');
     Route::get('/reservation/{event}', [ClientController::class, 'addReservation'])->name('reservations.create');
-    Route::post('/reservation/{reservation}',[ClientController::class,'paiement'])->name('reservations.paiement');
+    // Route::post('/reservation/{reservation}',[ClientController::class,'paiement'])->name('reservations.paiement');
 
-    Route::get('/client/reservations',[ClientController::class,'listeReservation'])->name('client.reservations');
+    //  Route::get('/client/reservations',[ClientController::class,'listeReservation'])->name('client.reservations');
     Route::get('/client/profile',[ClientController::class,'profile'])->name('client.profile');
     Route::put('/client/profile/update/{user}',[ClientController::class,'updateProfile'])->name('client.profile.update');
 
-    Route::post('validate-codePromo',[CodepromoController::class,'validateCodePromo'])->name('validate.codePromo');
+    // Route::post('validate-codePromo',[CodepromoController::class,'validateCodePromo'])->name('validate.codePromo');
 
     Route::post('/client/reservations',[ReservationController::class,'store'])->name('client.reservations.store');
+    Route::get('/client/reservations/listeReservations',[ReservationController::class,'index'])->name('client.reservations.listeReservations');
 });
 
 

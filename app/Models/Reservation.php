@@ -25,6 +25,16 @@ class Reservation extends Model
     //     return $this->belongsTo(Codepromo::class);
     // }
 
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
     public function codepromos()
     {
         return $this->belongsTo(Codepromo::class, 'code_id');

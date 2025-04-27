@@ -15,10 +15,16 @@ class Client extends Model
         'user_id'
     ];
 
-    public function events(){
-        return $this->belongsToMany(Event::class, 'reservations');
+    // public function events(){
+    //     return $this->belongsToMany(Event::class, 'reservations')
+    //     ->withPivot('nom', 'prenom', 'email', 'tel', 'prix_total', 'code_id');
+    // }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
-    
+
     public function users(){
         return $this->belongsTo(User::class);
     }

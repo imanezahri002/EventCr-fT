@@ -28,10 +28,10 @@ class ClientController extends Controller
         return view('Client.events.addReservation', compact('event','client','user'));
     }
 
-    public function listeReservation(){
+    // public function listeReservation(){
 
-        return view ('Client.reservations.reservation');
-    }
+    //     return view ('Client.reservations.reservation');
+    // }
     public function updateProfile(UpdateClientRequest $request)
     {
 

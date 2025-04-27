@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use App\Models\Codepromo;
+use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
@@ -14,7 +16,13 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $client = Auth::user()->clients;
+        $reservations = Reservation::where('client_id', $client->id)
+        ->with(['event', 'codepromos'])
+        ->get();
+        //  dd($reservations);
+        return view('Client.reservations.reservation', compact('reservations'));
+
     }
 
     /**
@@ -29,7 +37,7 @@ class ReservationController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreReservationRequest $request)
-    {  
+    {
         $client = Auth::user()->clients;
 
         $data = [
@@ -37,17 +45,34 @@ class ReservationController extends Controller
             'prenom' => $request->prenom,
             'email' => $request->email,
             'tel' => $request->tel,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
 
+        $prix = Event::find($request->event_id)->prix;
+        $data['prix_total'] = $prix;
 
-        if ($request->filled('codePromo')) {
-            $data['codePromo'] = $request->codePromo;
+        if ($request->filled('code_promo')) {
+            $codepromo = Codepromo::where('code', $request->code_promo)->first();
+            if (!$codepromo) {
+                return redirect()->back()->withErrors(['code_promo' => 'Code promo non valide']);
+            }
+            if ($codepromo->event_id != $request->event_id) {
+                return redirect()->back()->withErrors(['code_promo' => 'Ce code promo non valide.']);
+            }
+            $usageCount = Reservation::where('code_id', $codepromo->id)->count();
+            if ($usageCount >= $codepromo->nbUtilisation) {
+                return redirect()->back()->withErrors(['code_promo' => 'Ce code promo est expiré.']);
+            }
+
+
+            $data['code_id'] = $codepromo->id;
+            $data['prix_total'] = $prix - ($prix * ($codepromo->remise / 100));
         }
 
         $client->events()->attach($request->event_id, $data);
 
-        return redirect()->route('client.reservations')->with('success', 'Reservation added successfully');
-
+        return redirect()->route('client.reservations.listeReservations')->with('success', 'Reservation added successfully');
     }
 
     /**
