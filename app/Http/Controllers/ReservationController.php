@@ -18,8 +18,8 @@ class ReservationController extends Controller
     {
         $client = Auth::user()->clients;
         $reservations = Reservation::where('client_id', $client->id)
-        ->with(['event', 'codepromos'])
-        ->get();
+            ->with(['event', 'codepromos'])
+            ->paginate(3); // This will show 10 items per page
         //  dd($reservations);
         return view('Client.reservations.reservation', compact('reservations'));
 

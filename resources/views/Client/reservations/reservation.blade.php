@@ -18,7 +18,7 @@
     </div>
     @foreach ($reservations as $reservation)
     <!-- Reservations List -->
-    <div class="space-y-4">
+    <div class="space-y-4 mt-4">
       <!-- Reservation 1 -->
       <div class="glass-effect rounded-xl overflow-hidden shadow-md">
         <div class="p-5">
@@ -55,13 +55,24 @@
                 <span class="text-sm text-gray-700">Billet #EF2025-{{$reservation->id}}</span>
                 </div>
                 <div class="mt-3 md:mt-0 flex space-x-2">
-                  <button class="bg-white border border-gray-300 text-gray-700 text-sm font-medium py-1.5 px-4 rounded-full hover:bg-gray-50 transition-all shadow-sm flex items-center">
+                  {{-- <button class="bg-white border border-gray-300 text-gray-700 text-sm font-medium py-1.5 px-4 rounded-full hover:bg-gray-50 transition-all shadow-sm flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                     Voir
-                  </button>
+                  </button> --}}
+                  <button
+                        type="button"
+                        data-modal-target="modal-{{$reservation->id}}"
+                        data-modal-toggle="modal-{{$reservation->id}}"
+                        class="bg-white border border-gray-300 text-gray-700 text-sm font-medium py-1.5 px-4 rounded-full hover:bg-gray-50 transition-all shadow-sm flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        Voir
+                    </button>
                   <button class="bg-gradient-to-r from-purple-400 to-pink-600 text-white text-sm font-medium py-1.5 px-4 rounded-full hover:opacity-90 transition-all flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -77,28 +88,71 @@
 
     </div>
 
-@endforeach
-    <!-- End of Reservations List -->
+        <!-- Modal -->
+<div id="modal-{{$reservation->id}}" class="hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-6 rounded-lg w-11/12 md:w-1/2 shadow-lg">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Détails de la réservation</h2>
+        <button type="button" data-modal-hide="modal-{{$reservation->id}}" class="text-gray-400 hover:text-gray-600">&times;</button>
+      </div>
 
-    <!-- Pagination -->
-    <div class="mt-8">
-      <nav class="flex justify-center">
-        <ul class="flex space-x-2">
-          <li>
-            <a href="#" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Précédent</a>
-          </li>
-          <li>
-            <a href="#" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">1</a>
-          </li>
-          <li>
-            <a href="#" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">2</a>
-          </li>
-          <li>
-            <a href="#" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Suivant</a>
-          </li>
-        </ul>
-      </nav>
+      <div class="space-y-2">
+        <p><strong>Événement :</strong> {{$reservation->event->title}}</p>
+        <p><strong>Lieu :</strong> {{$reservation->event->location}}</p>
+        <p><strong>prix Total :</strong> {{$reservation->prix_total}}MAD</p>
+
+        <p><strong>Nom :</strong> {{$reservation->nom}}</p>
+        <p><strong>Prenom :</strong> {{$reservation->prenom}}</p>
+        <p><strong>Email :</strong> {{$reservation->email}}</p>
+        <p><strong>Tel :</strong> {{$reservation->tel}}</p>
+
+
+
+
+        <p><strong>Date :</strong> {{ \Carbon\Carbon::parse($reservation->event->date)->translatedFormat('d F Y') }}</p>
+        <p><strong>Numéro du billet :</strong> #EF2025-{{$reservation->id}}</p>
+        @if($reservation->codepromos)
+          <p><strong>Code Promo :</strong> {{$reservation->codepromos->code}}</p>
+          <p><strong>Réduction :</strong> {{$reservation->codepromos->remise}}%</p>
+        @else
+          <p><strong>Code Promo :</strong> Aucun</p>
+        @endif
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <button type="button" data-modal-hide="modal-{{$reservation->id}}" class="bg-gradient-to-r from-purple-400 to-pink-600 text-white px-4 py-2 rounded hover:opacity-90">
+          Fermer
+        </button>
+      </div>
     </div>
   </div>
 
+
+
+  @endforeach
+    <!-- End of Reservations List -->
+
+
+        <div class="mt-4">
+            {{ $reservations->links() }}
+        </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-modal-toggle]').forEach(button => {
+        button.addEventListener('click', () => {
+            const modalId = button.getAttribute('data-modal-target');
+            document.getElementById(modalId).classList.remove('hidden');
+        });
+    });
+
+    document.querySelectorAll('[data-modal-hide]').forEach(button => {
+        button.addEventListener('click', () => {
+            const modalId = button.getAttribute('data-modal-hide');
+            document.getElementById(modalId).classList.add('hidden');
+        });
+    });
+    </script>
   @endsection
+
