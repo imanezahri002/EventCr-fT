@@ -84,7 +84,7 @@
             <!-- Table rows will be inserted here by JavaScript -->
           </tbody>
         </table>
-        <div class="mt-4">
+        <div class="mt-4 mb-4 ml-2 mr-2">
             {{ $tags->links() }}
         </div>
         <div id="emptyMessage" class="px-6 py-4 text-center text-sm text-gray-500" style="display: none;">

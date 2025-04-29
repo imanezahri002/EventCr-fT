@@ -43,7 +43,7 @@
                         @foreach ($events as $event)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="py-3 px-4">{{$event->title}}</td>
-                            <td class="py-3 px-4">{{$event->organisateur_id}}</td>
+                            <td class="py-3 px-4">{{$event->organisateur->user->nom}}</td>
                             <td class="py-3 px-4">{{$event->prix}}</td>
                             <td class="py-3 px-4">{{$event->max_participants}}</td>
                             <td class="py-3 px-4">
@@ -62,7 +62,7 @@
                                 @endif
                             </td>
                             <td class="py-3 px-4">
-                                <a href="#" class="inline-flex items-center text-blue-600 hover:underline gap-x-1" title="Voir détails">
+                                <a href="{{ route('admin.events.detail', $event->id) }}" class="inline-flex items-center text-blue-600 hover:underline gap-x-1" title="Voir détails">
                                     <i class='bx bx-show text-lg'></i>
                                 </a>
                             </td>

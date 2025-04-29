@@ -47,5 +47,31 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Utilisateur banni.');
     }
 
+    public function detailEvent($id){
+        $event = Event::findOrFail($id);
+        // dd($event);
+        return view('Admin.events.detail', compact('event'));
+
+    }
+
+    public function accept($id)
+    {
+    $event = Event::findOrFail($id);
+    $event->status = 'accepted';
+    $event->save();
+
+    return redirect()->back()->with('success', 'Événement accepté.');
+    }
+
+    public function refuse($id)
+    {
+    $event = Event::findOrFail($id);
+    $event->status = 'rejected';
+    $event->save();
+
+    return redirect()->back()->with('success', 'Événement refusé.');
+    }
+
+
 
 }

@@ -73,6 +73,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/tags/{tag}',[TagController::class,'destroy'])->name('admin.tags.destroy');
     Route::post('/admin/tags/update/{tag}',[TagController::class,'update'])->name('admin.tags.update');
 
+    Route::get('/admin/events/{event}', [AdminController::class, 'detailEvent'])->name('admin.events.detail');
+
+    Route::patch('/event/{id}/accept', [AdminController::class, 'accept'])->name('event.accept');
+    Route::patch('/event/{id}/refuse', [AdminController::class, 'refuse'])->name('event.refuse');
+
+
 
 });
 
