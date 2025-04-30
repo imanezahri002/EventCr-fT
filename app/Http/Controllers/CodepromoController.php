@@ -15,15 +15,12 @@ class CodepromoController extends Controller
     $codepromo=$request->code;
     $codepromo=Codepromo::where('code',$codepromo)->first();
     $eventid = $request->event;
-
     // dd($codepromo->reservations());
 
-    if(!$codepromo){
+    if(!$codepromo || $eventid != $codepromo->event_id){
         return response()->json([
             'valide' => false,
             ]);
-
-
     }
     $usageCount = Reservation::where('code_id', $codepromo->id)->count();
 
