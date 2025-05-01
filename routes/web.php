@@ -51,9 +51,7 @@ Route::get('/formLogin',[AuthController::class,'loginView'])->name('login');
 Route::post('/login',[AuthController::class,'login'])->name('login.post');
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[EventController::class,'returnview'])->name('home');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -78,8 +76,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/event/{id}/accept', [AdminController::class, 'accept'])->name('event.accept');
     Route::patch('/event/{id}/refuse', [AdminController::class, 'refuse'])->name('event.refuse');
 
-
-
 });
 
 Route::middleware(['auth', 'role:organisateur'])->group(function () {
@@ -97,7 +93,6 @@ Route::middleware(['auth', 'role:organisateur'])->group(function () {
     Route::put('/organisateur/events/update/{event}',[EventController::class,'update'])->name('organisateur.events.update');
     Route::delete('/organisateur/events/delete/{event}',[EventController::class,'destroy'])->name('organisateur.events.destroy');
 
-
 });
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/dashboard', [ClientController::class, 'index'])->name('client.events');
@@ -114,8 +109,3 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/reservations/listeReservations',[ReservationController::class,'index'])->name('client.reservations.listeReservations');
 });
 
-
-
-// Route::get('/profile', function () {
-//     return view('profile');
-// })->middleware(['auth', 'verified']);

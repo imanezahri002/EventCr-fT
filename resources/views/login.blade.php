@@ -95,7 +95,7 @@
 
                     <p class="text-center text-sm text-gray-400">
                         Don't have an account?
-                        <a href="/signup" class="text-purple-400 hover:text-purple-300 transition-colors ml-1 cursor-pointer">
+                        <a href="{{route('register')}}" class="text-purple-400 hover:text-purple-300 transition-colors ml-1 cursor-pointer">
                             Sign up
                         </a>
                     </p>

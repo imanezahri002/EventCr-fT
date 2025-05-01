@@ -112,7 +112,7 @@
 
                     <p class="text-center text-sm text-gray-400">
                         Already have an account?
-                        <a href="/signin" class="text-purple-400 hover:text-purple-300 transition-colors ml-1 cursor-pointer">
+                        <a href="{{route('login')}}" class="text-purple-400 hover:text-purple-300 transition-colors ml-1 cursor-pointer">
                             Sign in
                         </a>
                     </p>

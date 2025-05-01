@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
+
+    public function returnview(){
+        $events = Event::where('date', '>=', now())->orderBy('date')->paginate(6);
+        $events->load('categorie');
+        return view('welcome', compact('events'));
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -113,125 +113,34 @@
             <button class="hover:text-black">This Month</button>
         </div>
 
-        <!-- Liste des événements -->
+
+          <!-- Liste des événements -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            @foreach ($events as $event)
             <!-- Carte d'événement -->
             <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
                 <div class="h-48 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/600x400/?concert');"></div>
                 <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-900">Festival de Musique</h3>
+                    <h3 class="text-lg font-bold text-gray-900">{{$event->title}}</h3>
                     <p class="text-gray-600 flex items-center mt-2">
-                        📅 <span class="ml-2">Sam, 10 Avril</span>
-                    </p>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        📍 <span class="ml-2">Casablanca, Maroc</span>
-                    </p>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        💰 <span class="ml-2">250 MAD</span>
-                    </p>
-                    <button class="mt-4 w-full bg-gradient-to-r from-purple-400 to-pink-600 text-white py-2 rounded-lg hover:from-purple-500 hover:to-pink-700">
-                        Réserver
-                    </button>
-                </div>
-            </div>
+                        📅 <span class="ml-2">{{ \Carbon\Carbon::parse($event->date)->translatedFormat('D, d F') }}</span>
 
-            <!-- Carte 2 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                <div class="h-48 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/600x400/?conference');"></div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-900">Conférence Tech</h3>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        📅 <span class="ml-2">Ven, 15 Avril</span>
                     </p>
                     <p class="text-gray-600 flex items-center mt-2">
-                        📍 <span class="ml-2">Rabat, Maroc</span>
+                        📍 <span class="ml-2">{{$event->location}}</span>
                     </p>
                     <p class="text-gray-600 flex items-center mt-2">
-                        💰 <span class="ml-2">Gratuit</span>
+                        💰 <span class="ml-2">{{$event->prix}} MAD</span>
                     </p>
-                    <button class="mt-4 w-full bg-gradient-to-r from-purple-400 to-pink-600 text-white py-2 rounded-lg hover:from-purple-500 hover:to-pink-700">
+                    <a href="{{route('login')}}" class="mt-4 w-full inline-block bg-gradient-to-r from-purple-400 to-pink-600 text-white py-2 text-center rounded-lg hover:from-purple-500 hover:to-pink-700">
                         Réserver
-                    </button>
+                    </a>
                 </div>
             </div>
-
-            <!-- Carte 3 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
-                <div class="h-48 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/600x400/?sports');"></div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-900">Tournoi de Football</h3>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        📅 <span class="ml-2">Dim, 20 Avril</span>
-                    </p>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        📍 <span class="ml-2">Marrakech, Maroc</span>
-                    </p>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        💰 <span class="ml-2">100 MAD</span>
-                    </p>
-                    <button class="mt-4 w-full bg-gradient-to-r from-purple-400 to-pink-600 text-white py-2 rounded-lg hover:from-purple-500 hover:to-pink-700">
-                        Réserver
-                    </button>
-                </div>
-            </div>
-            <!-- Carte 4 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
-                <div class="h-48 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/600x400/?sports');"></div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-900">Tournoi de Football</h3>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        📅 <span class="ml-2">Dim, 20 Avril</span>
-                    </p>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        📍 <span class="ml-2">Marrakech, Maroc</span>
-                    </p>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        💰 <span class="ml-2">100 MAD</span>
-                    </p>
-                    <button class="mt-4 w-full bg-gradient-to-r from-purple-400 to-pink-600 text-white py-2 rounded-lg hover:from-purple-500 hover:to-pink-700">
-                        Réserver
-                    </button>
-                </div>
-            </div>
-            <!-- Carte 5 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
-                <div class="h-48 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/600x400/?sports');"></div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-900">Tournoi de Football</h3>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        📅 <span class="ml-2">Dim, 20 Avril</span>
-                    </p>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        📍 <span class="ml-2">Marrakech, Maroc</span>
-                    </p>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        💰 <span class="ml-2">100 MAD</span>
-                    </p>
-                    <button class="mt-4 w-full bg-gradient-to-r from-purple-400 to-pink-600 text-white py-2 rounded-lg hover:from-purple-500 hover:to-pink-700">
-                        Réserver
-                    </button>
-                </div>
-            </div>
-            <!-- Carte 6 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
-                <div class="h-48 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/600x400/?sports');"></div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-gray-900">Tournoi de Football</h3>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        📅 <span class="ml-2">Dim, 20 Avril</span>
-                    </p>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        📍 <span class="ml-2">Marrakech, Maroc</span>
-                    </p>
-                    <p class="text-gray-600 flex items-center mt-2">
-                        💰 <span class="ml-2">100 MAD</span>
-                    </p>
-                    <button class="mt-4 w-full bg-gradient-to-r from-purple-400 to-pink-600 text-white py-2 rounded-lg hover:from-purple-500 hover:to-pink-700">
-                        Réserver
-                    </button>
-                </div>
-            </div>
+            @endforeach
         </div>
+        <!-- Pagination -->
+
     </div>
 </section>
 
