@@ -104,7 +104,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::put('/client/profile/update/{user}',[ClientController::class,'updateProfile'])->name('client.profile.update');
 
     Route::post('validate-codePromo',[CodepromoController::class,'validateCodePromo'])->name('validate.codePromo');
-//ii
+
     Route::post('/client/reservations',[ReservationController::class,'store'])->name('client.reservations.store');
     Route::get('/client/reservations/listeReservations',[ReservationController::class,'index'])->name('client.reservations.listeReservations');
 });
