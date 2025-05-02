@@ -32,9 +32,10 @@ class StoreEventRequest extends FormRequest
             'tags' => 'array|exists:tags,id',
             'prix'=> 'required|numeric|min:0',
             'max_participants' => 'required|integer|min:1',
-            'promo_code' => 'string',
-            'remise'=>'numeric|min:0|max:100',
-            'nbUtilisation'=>'numeric|min:1',
+            'promo_code' => 'nullable|string',
+            'remise' => 'nullable|required_with:promo_code|numeric|min:0|max:100',
+            'nbUtilisation' => 'nullable|required_with:promo_code|integer|min:1',
+
 
         ];
     }

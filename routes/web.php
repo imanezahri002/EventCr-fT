@@ -94,6 +94,7 @@ Route::middleware(['auth', 'role:organisateur'])->group(function () {
     Route::delete('/organisateur/events/delete/{event}',[EventController::class,'destroy'])->name('organisateur.events.destroy');
 
 });
+
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/dashboard', [ClientController::class, 'index'])->name('client.events');
     Route::get('/reservation/{event}', [ClientController::class, 'addReservation'])->name('reservations.create');

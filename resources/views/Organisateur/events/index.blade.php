@@ -48,7 +48,7 @@
         <div class="bg-white rounded-2xl overflow-hidden group hover:shadow-xl transition-all duration-300">
             <!-- Event Image with Overlay -->
             <div class="relative h-56">
-                <img src="{{ $event->image_url }}" alt="{{ $event->title }}"
+                <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300"></div>
 

@@ -15,8 +15,9 @@
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
         <!-- Event Image -->
         <div class="relative h-96">
-            <img src="{{ $event->image_url }}" alt="{{ $event->title }}"
-                class="w-full h-full object-cover">
+            @if ($event->image)
+            <img src="{{ asset('storage/' . $event->image) }}"  class="w-full h-full object-cover" alt="Image de l'événement" width="200">
+        @endif
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
             <!-- Status Badge -->

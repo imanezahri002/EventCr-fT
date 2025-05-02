@@ -52,8 +52,9 @@ class EventController extends Controller
         $imagePath = null;
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('events');
+            $imagePath = $request->file('image')->store('events', 'public');
         }
+        dd($imagePath);
         $organisateur=auth()->user()->organisateur;
 
         $event=Event::create([

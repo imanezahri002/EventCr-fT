@@ -99,7 +99,7 @@
                             <div class="flex text-sm text-gray-600">
                                 <label for="image" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
                                     <span>Upload a file</span>
-                                    <input id="image" name="image" type="file" class="sr-only">
+                                    <input id="image" name="image" type="file" class="sr-only" accept="image/*">
                                 </label>
                             </div>
                         </div>
