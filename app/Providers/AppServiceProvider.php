@@ -14,6 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+         $this->app->bind(
+            'App\Repository\ICategory',
+            'App\Repository\implements\CategoryRepository'
+        );
 
     }
 
@@ -22,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        
+
     }
 }

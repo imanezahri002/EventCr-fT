@@ -17,8 +17,8 @@
                 <span class="text">Evenements</span>
             </a>
         </li>
-        <li>
-            <a href="#">
+        <li class="{{request()->routeIs('organisateur.reservations') ? 'active' : ''}}">
+            <a href="{{route('organisateur.reservations')}}">
                 <i class='bx bxs-coupon'></i>
                 <span class="text">Reservations</span>
             </a>

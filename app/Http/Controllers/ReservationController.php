@@ -47,6 +47,8 @@ class ReservationController extends Controller
             'tel' => $request->tel,
             'created_at' => now(),
             'updated_at' => now(),
+            'client_id'=> $client->id,
+            'event_id' => $request->event_id,
         ];
 
         $prix = Event::find($request->event_id)->prix;
@@ -69,8 +71,8 @@ class ReservationController extends Controller
             $data['code_id'] = $codepromo->id;
             $data['prix_total'] = $prix - ($prix * ($codepromo->remise / 100));
         }
-
-        $client->events()->attach($request->event_id, $data);
+        
+        Reservation::create($data);
 
         return redirect()->route('client.reservations.listeReservations')->with('success', 'Reservation added successfully');
     }

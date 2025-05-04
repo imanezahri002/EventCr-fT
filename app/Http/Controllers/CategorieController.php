@@ -5,16 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use App\Http\Requests\StoreCategorieRequest;
 use App\Http\Requests\UpdateCategorieRequest;
+use App\Repository\ICategory;
+
+use App\Repository\ICategoryService;
 use Illuminate\Contracts\Cache\Store;
 
 class CategorieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   private ICategory $categoryService;
+
+
+    public function __construct(ICategory $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+
     public function index()
     {
-        $categories=Categorie::paginate(10);
+        $categories=$this->categoryService->getAllCategories();
+
         return view('Admin.categories.index', compact('categories'));
     }
 
@@ -33,10 +42,15 @@ class CategorieController extends Controller
      */
     public function store(StoreCategorieRequest $request)
     {
-        Categorie::create([
-            'nom' => $request->category_name,
-        ]);
+
+        $validate = $request->validated();
+        $this->categoryService->createCategory($validate);
         return redirect()->back()->with('success', 'Catégorie ajoutée avec succès !');
+
+        // Categorie::create([
+        //     'nom' => $request->category_name,
+        // ]);
+        // return redirect()->back()->with('success', 'Catégorie ajoutée avec succès !');
     }
 
 
@@ -64,9 +78,8 @@ class CategorieController extends Controller
     public function update(UpdateCategorieRequest $request, Categorie $categorie)
     {
 
-        $categorie->update([
-            'nom' => $request->category_name,
-        ]);
+        $validate = $request->validated();
+        $this->categoryService->updateCategory($categorie->id,$validate);
         return redirect()->back()->with('success', 'Catégorie modifiée avec succès !');
     }
 
@@ -75,7 +88,7 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
-        $categorie->delete();
+        $this->categoryService->deleteCategory($categorie->id);
         return redirect()->back()->with('success', 'Catégorie supprimée avec succès !');
     }
 }

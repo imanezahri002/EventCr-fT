@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Organisateur;
 use App\Http\Requests\StoreOrganisateurRequest;
 use App\Http\Requests\UpdateOrganisateurRequest;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 
 class OrganisateurController extends Controller
@@ -51,6 +52,18 @@ class OrganisateurController extends Controller
     public function create()
     {
         //
+    }
+    public function displayReservations()
+    {
+        $user=Auth::user();
+        $organisateur = Organisateur::where('user_id', $user->id)->first();
+        // dd($organisateur);
+        $eventIds = $organisateur->events()->pluck('id');
+
+        $reservations = Reservation::whereIn('event_id', $eventIds)
+        ->with(['event', 'client']) // Eager load related event and client
+        ->paginate(1);
+        return view('Organisateur.reservations.index', compact('reservations'));
     }
 
     /**

@@ -93,6 +93,7 @@ Route::middleware(['auth', 'role:organisateur'])->group(function () {
     Route::put('/organisateur/events/update/{event}',[EventController::class,'update'])->name('organisateur.events.update');
     Route::delete('/organisateur/events/delete/{event}',[EventController::class,'destroy'])->name('organisateur.events.destroy');
 
+    Route::get('/organisateur/reservations',[OrganisateurController::class,'displayReservations'])->name('organisateur.reservations');
 });
 
 Route::middleware(['auth', 'role:client'])->group(function () {
