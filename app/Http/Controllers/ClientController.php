@@ -21,17 +21,13 @@ class ClientController extends Controller
         return view('Client.events.eventsListe', compact('events'));
     }
 
-    public function addreservation(Event $event)
+    public function addReservation(Event $event)
     {
         $user = auth()->user();
         $client = $user->client;
         return view('Client.events.addReservation', compact('event','client','user'));
     }
 
-    // public function listeReservation(){
-
-    //     return view ('Client.reservations.reservation');
-    // }
     public function updateProfile(UpdateClientRequest $request)
     {
 

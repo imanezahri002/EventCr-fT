@@ -14,7 +14,10 @@ class EventController extends Controller
 {
 
     public function returnview(){
-        $events = Event::where('date', '>=', now())->orderBy('date')->paginate(6);
+        $events = Event::where('date', '>=', now())
+               ->orderBy('date', 'desc')
+               ->limit(6)
+               ->get();
         $events->load('categorie');
         return view('welcome', compact('events'));
     }
@@ -54,7 +57,7 @@ class EventController extends Controller
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('events', 'public');
         }
-        
+
         $organisateur=auth()->user()->organisateur;
 
         $event=Event::create([
@@ -153,9 +156,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        if (!Gate::allows('delete', $event)) {
-            return redirect()->route('organisateur.events')->with('error', 'Event cannot be deleted because it has participants');
-        }
+
         if ($event->image) {
             Storage::delete($event->image);
         }

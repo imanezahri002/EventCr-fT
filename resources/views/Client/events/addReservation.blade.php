@@ -230,7 +230,7 @@
                 valid.classList.add('hidden');
                 document.getElementById("invalid-promo").classList.remove('hidden')
             }
-            console.log(data['valide']);
+            // console.log(data['valide']);
 
         })
         .catch(error => {

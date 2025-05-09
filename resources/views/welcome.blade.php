@@ -119,7 +119,7 @@
             @foreach ($events as $event)
             <!-- Carte d'événement -->
             <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                <div class="h-48 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/600x400/?concert');"></div>
+                <div class="h-48 bg-cover bg-center" style="background-image: url('{{ asset('storage/' . $event->image) }}');"></div>
                 <div class="p-4">
                     <h3 class="text-lg font-bold text-gray-900">{{$event->title}}</h3>
                     <p class="text-gray-600 flex items-center mt-2">

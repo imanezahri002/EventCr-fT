@@ -19,7 +19,7 @@ class ReservationController extends Controller
         $client = Auth::user()->clients;
         $reservations = Reservation::where('client_id', $client->id)
             ->with(['event', 'codepromos'])
-            ->paginate(3); // This will show 10 items per page
+            ->paginate(3);
         //  dd($reservations);
         return view('Client.reservations.reservation', compact('reservations'));
 
@@ -55,6 +55,7 @@ class ReservationController extends Controller
         $data['prix_total'] = $prix;
 
         if ($request->filled('code_promo')) {
+
             $codepromo = Codepromo::where('code', $request->code_promo)->first();
             if (!$codepromo) {
                 return redirect()->back()->withErrors(['code_promo' => 'Code promo non valide']);
@@ -71,7 +72,6 @@ class ReservationController extends Controller
             $data['code_id'] = $codepromo->id;
             $data['prix_total'] = $prix - ($prix * ($codepromo->remise / 100));
         }
-        
         Reservation::create($data);
 
         return redirect()->route('client.reservations.listeReservations')->with('success', 'Reservation added successfully');

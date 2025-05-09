@@ -17,7 +17,7 @@ class Codepromo extends Model
     {
         return $this->belongsTo(Event::class);
     }
-    
+
     public function reservations(){
         return $this->hasMany(Reservation::class);
     }

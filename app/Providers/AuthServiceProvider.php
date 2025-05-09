@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -21,8 +22,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('delete', function ($user, $event) {
-            return $event->participants()->count() == 0;
-        });
+        // Gate::define('delete-event', function ($user, Event $event) {
+        //     return $event->reservations()->count() == 0;
+        // });
     }
 }

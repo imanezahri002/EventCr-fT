@@ -20,10 +20,7 @@ class Reservation extends Model
         'tel',
     ];
 
-    // public function codePromos()
-    // {
-    //     return $this->belongsTo(Codepromo::class);
-    // }
+    
 
     public function client()
     {
